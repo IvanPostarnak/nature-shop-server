@@ -1,6 +1,6 @@
-const { Client } = require('pg');
+const Pool = require('pg').Pool;
 
-const pgClient = new Client({
+const pgEngine = new Pool({
   host: process.env.POSTGRE_HOST,
   port: process.env.POSTGRE_PORT,
   user: process.env.POSTGRE_USER,
@@ -8,4 +8,4 @@ const pgClient = new Client({
   database: process.env.POSTGRE_DB
 });
 
-module.exports = pgClient;
+module.exports = pgEngine;

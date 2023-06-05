@@ -1,14 +1,14 @@
 class Database {
-  constructor (client) {
-    this.client = client;
+  constructor (engine) {
+    this.engine = engine;
   }
 
   connect() {
-    return this.client.connect();
+    return this.engine.connect();
   }
 
   end() {
-    return this.client.end();
+    return this.engine.end();
   }
 };
 

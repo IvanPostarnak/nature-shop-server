@@ -4,6 +4,7 @@ const Database = require('../entity/Database');
 class Postgresql extends Database {
   constructor (engine) {
     super(engine);
+    this.engine = engine;
   }
 
   defineTableByKeyword (arg) {
@@ -20,14 +21,9 @@ class Postgresql extends Database {
     if (table) {
       const query = isFull ? '*' : 'post_id, title, content, author_id, language_id';
       try {
-        await this.engine.connect();
-        const result = await this.engine.query(
-          `SELECT ${query} FROM ${table}`
-        );
-        this.engine.end();
+        const result = await this.engine.query(`SELECT ${query} FROM ${table}`);
         return result.rows;
       } catch (error) {
-        this.engine.end();
         throw new Error('Error querying the database: ' + error.message);
       }
     } else {
@@ -39,17 +35,22 @@ class Postgresql extends Database {
     const table = this.defineTableByKeyword(keyword);
     if (table) {
       try {
-        await this.engine.connect();
-        const result = await this.engine.query(`SELECT * FROM ${table}`);
-        this.engine.end();
+        const result = await this.engine.query(`SELECT COUNT(*) as total_count FROM ${table}`);
         return result.rows[0];
       } catch (error) {
-        this.engine.end();
         throw new Error('Error querying the database: Server Error');
       }
     } else {
       throw new Error('Unmatching keyword parameter at getTotalCount method: ' + keyword);
     }
+  }
+
+  connect() {
+    return this.engine.connect();
+  }
+
+  end() {
+    return this.engine.end();
   }
 };
 
