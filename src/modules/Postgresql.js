@@ -1,9 +1,9 @@
-const pgClient = require("../config/postgresql");
+const pgEngine = require("../config/postgresql");
 const Database = require('../entity/Database');
 
 class Postgresql extends Database {
-  constructor (client) {
-    super(client);
+  constructor (engine) {
+    super(engine);
   }
 
   defineTableByKeyword (arg) {
@@ -15,17 +15,37 @@ class Postgresql extends Database {
     return tableName;
   }
 
+  async getAll(keyword, isFull) {
+    const table = this.defineTableByKeyword(keyword);
+    if (table) {
+      const query = isFull ? '*' : 'post_id, title, content, author_id, language_id';
+      try {
+        await this.engine.connect();
+        const result = await this.engine.query(
+          `SELECT ${query} FROM ${table}`
+        );
+        this.engine.end();
+        return result.rows;
+      } catch (error) {
+        this.engine.end();
+        throw new Error('Error querying the database: ' + error.message);
+      }
+    } else {
+      throw new Error('Unmatching keyword parameter at getTotalCount method: ' + keyword);
+    }
+  }
+
   async getTotalCount(keyword) {
     const table = this.defineTableByKeyword(keyword);
     if (table) {
       try {
-        await this.client.connect();
-        const result = await this.client.query(`SELECT COUNT(*) as total_count FROM ${table}`);
+        await this.engine.connect();
+        const result = await this.engine.query(`SELECT * FROM ${table}`);
+        this.engine.end();
         return result.rows[0];
       } catch (error) {
+        this.engine.end();
         throw new Error('Error querying the database: Server Error');
-      } finally {
-        this.client.end();
       }
     } else {
       throw new Error('Unmatching keyword parameter at getTotalCount method: ' + keyword);
@@ -33,4 +53,4 @@ class Postgresql extends Database {
   }
 };
 
-module.exports = new Postgresql(pgClient);
+module.exports = new Postgresql(pgEngine);
