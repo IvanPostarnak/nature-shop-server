@@ -1,8 +1,9 @@
-const database = require('./../modules/database');
+const Postgresql = require('../modules/Postgresql');
+const Controller = require('./../entity/Controller');
 
-class HomeController {
+class HomeController extends Controller {
   constructor (database) {
-    this.database = database;
+    super(database);
   }
 
   getHome() {
@@ -10,4 +11,4 @@ class HomeController {
   }
 }
 
-module.exports = new HomeController(database);
+module.exports = new HomeController(Postgresql);
