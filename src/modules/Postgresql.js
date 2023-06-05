@@ -1,5 +1,6 @@
 const pgEngine = require("../config/postgresql");
 const Database = require('../entity/Database');
+const configureQuery = require("../helpers/configureQuery");
 
 class Postgresql extends Database {
   constructor (engine) {
@@ -15,6 +16,22 @@ class Postgresql extends Database {
     }
     return tableName;
   }
+
+  async getByQuery(keyword, queryObj) {
+    const table = this.defineTableByKeyword(keyword);
+    if (table) {
+      const queryString = configureQuery(queryObj, table);
+      console.log(queryString);
+      try {
+        const result = await this.engine.query(queryString);
+        return result.rows;
+      } catch (error) {
+        throw new Error('Error querying the database: ' + error.message);
+      }
+    } else {
+      throw new Error('Unmatching keyword parameter at getTotalCount method: ' + keyword);
+    }
+  } 
 
   async getAll(keyword) {
     const table = this.defineTableByKeyword(keyword);

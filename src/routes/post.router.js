@@ -2,12 +2,10 @@ const PostRouter = require('express').Router();
 const authorIdQuery = require('../middleware/authorIdQuery');
 const endQuery = require('../middleware/endQuery');
 const limitQuery = require('../middleware/limitQuery');
-const pageQuery = require('../middleware/pageQuery');
 const startQuery = require('../middleware/startQuery');
 const PostController = require('./../controller/post.controller');
 
 PostRouter.use(limitQuery);
-PostRouter.use(pageQuery);
 PostRouter.use(startQuery);
 PostRouter.use(endQuery);
 PostRouter.use(authorIdQuery);
@@ -17,7 +15,6 @@ PostRouter.route('/')
             const response = await PostController.getByQuery({
               author_id: req.author_id,
               limit: req.limit,
-              page: req.page,
               start: req.start,
               end: req.end
             });
