@@ -15,4 +15,11 @@ PostRouter.route('/total')
             res.status(response.code).json(response.body);
           });
 
+PostRouter.route('/:id')
+          .get(async (req, res) => {
+            const id = req.params.id;
+            const response = await PostController.getOneById(id);
+            res.status(response.code).json(response.body);
+          });
+
 module.exports = PostRouter;

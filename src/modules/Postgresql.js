@@ -16,12 +16,11 @@ class Postgresql extends Database {
     return tableName;
   }
 
-  async getAll(keyword, isFull) {
+  async getAll(keyword) {
     const table = this.defineTableByKeyword(keyword);
     if (table) {
-      const query = isFull ? '*' : 'post_id, title, content, author_id, language_id';
       try {
-        const result = await this.engine.query(`SELECT ${query} FROM ${table}`);
+        const result = await this.engine.query(`SELECT * FROM ${table}`);
         return result.rows;
       } catch (error) {
         throw new Error('Error querying the database: ' + error.message);
@@ -36,6 +35,20 @@ class Postgresql extends Database {
     if (table) {
       try {
         const result = await this.engine.query(`SELECT COUNT(*) as total_count FROM ${table}`);
+        return result.rows[0];
+      } catch (error) {
+        throw new Error('Error querying the database: Server Error');
+      }
+    } else {
+      throw new Error('Unmatching keyword parameter at getTotalCount method: ' + keyword);
+    }
+  }
+
+  async getOneById(keyword, id) {
+    const table = this.defineTableByKeyword(keyword);
+    if (table) {
+      try {
+        const result = await this.engine.query(`SELECT * FROM ${table} WHERE post_id = ${id}`);
         return result.rows[0];
       } catch (error) {
         throw new Error('Error querying the database: Server Error');

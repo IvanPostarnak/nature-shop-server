@@ -6,10 +6,10 @@ class PostController extends Controller {
     super(database);
   }
 
-  async getAll(isFull=false) {
+  async getAll() {
     let response = {code: 200, body: [], count: 0};
     try {
-      response.body = await this.database.getAll('posts', isFull)
+      response.body = await this.database.getAll('posts')
       response.count = response.body.length;
     } catch (err) {
       response.code = 500;
@@ -25,6 +25,21 @@ class PostController extends Controller {
     } catch (err) {
       response.code = 500;
       response.body = err.message;
+    }
+    return response;
+  }
+
+  async getOneById(id) {
+    let response = {code: 200, body: []};
+    try {
+      response.body = await this.database.getOneById('posts', id)
+    } catch (err) {
+      response.code = 500;
+      response.body = err.message;
+    }
+    if (response.body === undefined) {
+      response.code = 404;
+      response.body = `Post with id '${id}' was not found`;
     }
     return response;
   }
