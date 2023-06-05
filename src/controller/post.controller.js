@@ -1,9 +1,28 @@
+const configureQuery = require('../helpers/configureQuery');
+const filterObjectByValue = require('../helpers/filterObjectByValue');
 const Postgresql = require('../modules/Postgresql');
 const Controller = require('./../entity/Controller');
 
 class PostController extends Controller {
   constructor (database) {
     super(database);
+  }
+
+  async getByQuery(queryObj) {
+    let response = {code: 200, body: [], count: 0};
+    console.log(queryObj)
+    const filteredQuery = filterObjectByValue(queryObj)
+    console.log(filteredQuery)
+    const query = configureQuery(filteredQuery, process.env.MIN_QUERY_PARAMS);
+    console.log(query);
+    try {
+      response.body = await this.database.getByQuery('posts')
+      response.count = response.body.length;
+    } catch (err) {
+      response.code = 500;
+      response.body = err.message;
+    }
+    return response;
   }
 
   async getAll() {
