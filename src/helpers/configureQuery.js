@@ -9,7 +9,9 @@ const configureQuery = (queryObj, table) => {
     rating: `${queryObj.rating ? ` AND (rating_5 = ${queryObj.rating})` : ''}`,
     votes_number: `${queryObj.votes_number ? ` AND (votes_number_5 >= ${queryObj.votes_number})` : ''}`,
     visited_total: `${queryObj.visited_total ? ` AND (visited_total >= ${queryObj.visited_total})` : ''}`,
-    create_ts: `${queryObj.create_ts ? ` AND (create_ts >= to_timestamp('${numberToTimestamp(queryObj.create_ts)}', 'YYYY-MM-DD HH24:MI:SS'))` : ''}`
+    create_ts: `${queryObj.create_ts ? ` AND (create_ts >= to_timestamp('${numberToTimestamp(queryObj.create_ts)}', 'YYYY-MM-DD HH24:MI:SS'))` : ''}`,
+    title: `${queryObj.title ? ` AND (title ILIKE '%${queryObj.title}%')` : ''}`,
+    content: `${queryObj.content ? ` AND (content ILIKE '%${queryObj.content}%')` : ''}`,
   }
   const limitAddon = `${queryObj.limit ? ` LIMIT ${queryObj.limit}` : ''}`;
 

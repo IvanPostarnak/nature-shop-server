@@ -9,6 +9,7 @@ class PostController extends Controller {
 
   async getByQuery(queryObj) {
     let response = {code: 200, body: [], count: 0};
+    console.log(queryObj)
     const filteredQuery = filterObjectByValue(queryObj)
     try {
       response.body = await this.database.getByQuery('posts', filteredQuery)

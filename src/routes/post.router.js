@@ -9,34 +9,52 @@ const startQuery = require('../middleware/startQuery');
 const endQuery = require('../middleware/endQuery');
 const PostController = require('./../controller/post.controller');
 const createDateQuery = require('../middleware/createDateQuery');
-
-PostRouter.use(languageQuery);
-PostRouter.use(authorQuery);
-PostRouter.use(ratingQuery);
-PostRouter.use(votesQuery);
-PostRouter.use(visitedQuery);
-PostRouter.use(limitQuery);
-PostRouter.use(startQuery);
-PostRouter.use(endQuery);
-PostRouter.use(createDateQuery);
+const titleQuery = require('../middleware/titleQuery');
+const contentQuery = require('../middleware/contentQuery');
 
 PostRouter.route('/')
-          .get(async (req, res) => {
-            const response = await PostController.getByQuery({
-              language: req.language,
-              author: req.author,
-              rating: req.rating,
-              votes_number: req.votes_number,
-              visited_total: req.visited_total,
-              limit: req.limit,
-              start: req.start,
-              end: req.end,
-              create_ts: req.create_ts
-            });
-            res.set('X-Total-Amount', (await PostController.getTotalCount()).body.total_count);
-            res.set('X-Current-Amount', response.count);
-            res.status(response.code).json(response.body);
-          })
+          .get(
+            languageQuery,
+            authorQuery,
+            ratingQuery,
+            votesQuery,
+            visitedQuery,
+            limitQuery,
+            startQuery,
+            endQuery,
+            createDateQuery,
+            async (req, res) => {
+              const response = await PostController.getByQuery({
+                language: req.language,
+                author: req.author,
+                rating: req.rating,
+                votes_number: req.votes_number,
+                visited_total: req.visited_total,
+                limit: req.limit,
+                start: req.start,
+                end: req.end,
+                create_ts: req.create_ts
+              });
+              res.set('X-Total-Amount', (await PostController.getTotalCount()).body.total_count);
+              res.set('X-Current-Amount', response.count);
+              res.status(response.code).json(response.body);
+            }
+          )
+
+PostRouter.route('/search')
+          .get(
+            titleQuery,
+            contentQuery,
+            async (req, res) => {
+              const response = await PostController.getByQuery({
+                title: req.title,
+                content: req.content,
+              });
+              res.set('X-Total-Amount', (await PostController.getTotalCount()).body.total_count);
+              res.set('X-Current-Amount', response.count);
+              res.status(response.code).json(response.body);
+            }
+          )
 
 PostRouter.route('/all')
           .get(async (req, res) => {
