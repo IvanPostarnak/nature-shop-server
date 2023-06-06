@@ -1,22 +1,37 @@
 const PostRouter = require('express').Router();
-const authorIdQuery = require('../middleware/authorIdQuery');
-const endQuery = require('../middleware/endQuery');
+const languageQuery = require('../middleware/languageQuery');
+const authorQuery = require('../middleware/authorQuery');
+const ratingQuery = require('../middleware/ratingQuery');
+const votesQuery = require('../middleware/votesQuery');
+const visitedQuery = require('../middleware/visitedQuery');
 const limitQuery = require('../middleware/limitQuery');
 const startQuery = require('../middleware/startQuery');
+const endQuery = require('../middleware/endQuery');
 const PostController = require('./../controller/post.controller');
+const createDateQuery = require('../middleware/createDateQuery');
 
+PostRouter.use(languageQuery);
+PostRouter.use(authorQuery);
+PostRouter.use(ratingQuery);
+PostRouter.use(votesQuery);
+PostRouter.use(visitedQuery);
 PostRouter.use(limitQuery);
 PostRouter.use(startQuery);
 PostRouter.use(endQuery);
-PostRouter.use(authorIdQuery);
+PostRouter.use(createDateQuery);
 
 PostRouter.route('/')
           .get(async (req, res) => {
             const response = await PostController.getByQuery({
-              author_id: req.author_id,
+              language: req.language,
+              author: req.author,
+              rating: req.rating,
+              votes_number: req.votes_number,
+              visited_total: req.visited_total,
               limit: req.limit,
               start: req.start,
-              end: req.end
+              end: req.end,
+              create_ts: req.create_ts
             });
             res.set('X-Total-Amount', (await PostController.getTotalCount()).body.total_count);
             res.set('X-Current-Amount', response.count);

@@ -20,6 +20,7 @@ class Postgresql extends Database {
   async getByQuery(keyword, queryObj) {
     const table = this.defineTableByKeyword(keyword);
     if (table) {
+      console.log(queryObj)
       const queryString = configureQuery(queryObj, table);
       console.log(queryString);
       try {
