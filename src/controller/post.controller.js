@@ -12,7 +12,7 @@ class PostController extends Controller {
     console.log(queryObj)
     const filteredQuery = filterObjectByValue(queryObj)
     try {
-      response.body = await this.database.getByQuery('posts', filteredQuery)
+      response.body = await this.database.getByQuery(filteredQuery, 'posts');
       response.count = response.body.length;
     } catch (err) {
       response.code = 500;
@@ -51,7 +51,7 @@ class PostController extends Controller {
   async getOneById(id) {
     let response = {code: 200, body: []};
     try {
-      response.body = await this.database.getOneById('posts', id)
+      response.body = await this.database.getOneById(id, 'posts')
     } catch (err) {
       response.code = 500;
       response.body = err.message;

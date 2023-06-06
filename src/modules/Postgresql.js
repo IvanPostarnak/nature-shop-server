@@ -8,20 +8,28 @@ class Postgresql extends Database {
     this.engine = engine;
   }
 
-  defineTableByKeyword (arg) {
-    let tableName;
-    switch (arg) {
-      case 'posts':
-        tableName = 'post';
+  defineTableByKeyword (keywords) {
+    let tables = [];
+    for (let i in keywords) {
+      let tableName;
+      switch (keywords[i]) {
+        case 'posts':
+          tableName = 'post';
+          break;
+        case 'products':
+          tableName = 'product';
+          break;
+      }
+      tableName && tables.push(tableName)
     }
-    return tableName;
+    return tables;
   }
 
-  async getByQuery(keyword, queryObj) {
-    const table = this.defineTableByKeyword(keyword);
-    if (table) {
+  async getByQuery(queryObj, ...keywords) {
+    const tables = this.defineTableByKeyword(keywords);
+    if (tables) {
       console.log(queryObj)
-      const queryString = configureQuery(queryObj, table);
+      const queryString = configureQuery(queryObj, tables);
       console.log(queryString);
       try {
         const result = await this.engine.query(queryString);
@@ -30,49 +38,49 @@ class Postgresql extends Database {
         throw new Error('Error querying the database: ' + error.message);
       }
     } else {
-      throw new Error('Unmatching keyword parameter at getTotalCount method: ' + keyword);
+      throw new Error('Unmatching keyword parameter at getTotalCount method: ' + keywords);
     }
   } 
 
-  async getAll(keyword) {
-    const table = this.defineTableByKeyword(keyword);
-    if (table) {
+  async getAll(...keywords) {
+    const tables = this.defineTableByKeyword(keywords);
+    if (tables) {
       try {
-        const result = await this.engine.query(`SELECT * FROM ${table}`);
+        const result = await this.engine.query(`SELECT * FROM ${tables}`);
         return result.rows;
       } catch (error) {
         throw new Error('Error querying the database: ' + error.message);
       }
     } else {
-      throw new Error('Unmatching keyword parameter at getTotalCount method: ' + keyword);
+      throw new Error('Unmatching keyword parameter at getTotalCount method: ' + keywords);
     }
   }
 
-  async getTotalCount(keyword) {
-    const table = this.defineTableByKeyword(keyword);
-    if (table) {
+  async getTotalCount(...keywords) {
+    const tables = this.defineTableByKeyword(keywords);
+    if (tables) {
       try {
-        const result = await this.engine.query(`SELECT COUNT(*) as total_count FROM ${table}`);
+        const result = await this.engine.query(`SELECT COUNT(*) as total_count FROM ${tables}`);
         return result.rows[0];
       } catch (error) {
         throw new Error('Error querying the database: Server Error');
       }
     } else {
-      throw new Error('Unmatching keyword parameter at getTotalCount method: ' + keyword);
+      throw new Error('Unmatching keyword parameter at getTotalCount method: ' + keywords);
     }
   }
 
-  async getOneById(keyword, id) {
-    const table = this.defineTableByKeyword(keyword);
-    if (table) {
+  async getOneById(id, ...keywords) {
+    const tables = this.defineTableByKeyword(keywords);
+    if (tables) {
       try {
-        const result = await this.engine.query(`SELECT * FROM ${table} WHERE post_id = ${id}`);
+        const result = await this.engine.query(`SELECT * FROM ${tables} WHERE post_id = ${id}`);
         return result.rows[0];
       } catch (error) {
         throw new Error('Error querying the database: Server Error');
       }
     } else {
-      throw new Error('Unmatching keyword parameter at getTotalCount method: ' + keyword);
+      throw new Error('Unmatching keyword parameter at getTotalCount method: ' + keywords);
     }
   }
 
