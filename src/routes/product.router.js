@@ -15,4 +15,12 @@ ProductRouter.route('/total_count')
                res.status(response.code).send(response.body);
              });
 
+ProductRouter.route('/:support')
+             .get(async (req, res) => {
+              console.log(req.params)
+               const response = await ProductController.getSupport(req.params.support);
+               res.set('X-Total-Amount', response.count);
+               res.status(response.code).send(response.body);
+             });             
+
 module.exports = ProductRouter;

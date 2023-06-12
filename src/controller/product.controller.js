@@ -32,6 +32,22 @@ class ProductController extends Controller {
     }
     return response;
   }
+
+  async getSupport(param) {
+    let response = {code: 200, body: '', count: 0}
+    try {
+      response.body = await this.database.getAll(`products_${param}`);
+      response.count = response.body.length;
+    } catch (err) {
+      response.code = 500;
+      response.body = err.message;
+    }
+    if (response.count === 0) {
+      response.code = 404;
+      response.body = `There are no any products' ${param}`;
+    }
+    return response;
+  }
 }
 
 module.exports = new ProductController(Postgresql);

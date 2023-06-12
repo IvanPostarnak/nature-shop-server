@@ -22,6 +22,15 @@ class Postgresql extends Database {
         case 'products_basic':
           tableName = 'product_basic';
           break;
+        case 'products_categories':
+          tableName = 'product_category';
+          break;
+        case 'products_forms':
+          tableName = 'product_form';
+          break;
+        case 'products_types':
+          tableName = 'product_type';
+          break;
       }
       tableName && tables.push(tableName)
     }
@@ -31,7 +40,6 @@ class Postgresql extends Database {
   async getByQuery(queryObj, ...keywords) {
     const tables = this.defineTableByKeyword(keywords);
     if (tables[0]) {
-      console.log(queryObj)
       const queryString = configureQuery(queryObj, tables[0]);
       console.log(queryString);
       try {
