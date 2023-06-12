@@ -28,7 +28,23 @@ class ProductController extends Controller {
     }
     if (response.count === 0) {
       response.code = 404;
-      response.body = 'There are no any products';
+      response.body = 'There are not any products';
+    }
+    return response;
+  }
+
+  async getAll() {
+    let response = {code: 200, body: '', count: 0}
+    try {
+      response.body = await this.database.getAll('products_all');
+      response.count = response.body.length;
+    } catch (err) {
+      response.code = 500;
+      response.body = err.message;
+    }
+    if (response.count === 0) {
+      response.code = 404;
+      response.body = 'There are not any products';
     }
     return response;
   }
@@ -44,7 +60,7 @@ class ProductController extends Controller {
     }
     if (response.count === 0) {
       response.code = 404;
-      response.body = `There are no any products' ${param}`;
+      response.body = `There are not any products' ${param}`;
     }
     return response;
   }

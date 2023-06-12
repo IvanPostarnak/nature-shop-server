@@ -31,6 +31,9 @@ class Postgresql extends Database {
         case 'products_types':
           tableName = 'product_type';
           break;
+        case 'products_all':
+          tableName = 'product_everything';
+          break;
       }
       tableName && tables.push(tableName)
     }
