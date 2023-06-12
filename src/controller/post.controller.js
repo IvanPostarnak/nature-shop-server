@@ -34,6 +34,10 @@ class PostController extends Controller {
       response.code = 500;
       response.body = err.message;
     }
+    if (response.count === 0) {
+      response.code = 404;
+      response.body = `There are no any posts`;
+    }
     return response;
   }
 
