@@ -19,6 +19,9 @@ class Postgresql extends Database {
         case 'products':
           tableName = 'product';
           break;
+        case 'products_basic':
+          tableName = 'product_basic';
+          break;
       }
       tableName && tables.push(tableName)
     }
@@ -27,9 +30,9 @@ class Postgresql extends Database {
 
   async getByQuery(queryObj, ...keywords) {
     const tables = this.defineTableByKeyword(keywords);
-    if (tables) {
+    if (tables[0]) {
       console.log(queryObj)
-      const queryString = configureQuery(queryObj, tables);
+      const queryString = configureQuery(queryObj, tables[0]);
       console.log(queryString);
       try {
         const result = await this.engine.query(queryString);
@@ -44,9 +47,10 @@ class Postgresql extends Database {
 
   async getAll(...keywords) {
     const tables = this.defineTableByKeyword(keywords);
-    if (tables) {
+    console.log(tables);
+    if (tables[0]) {
       try {
-        const result = await this.engine.query(`SELECT * FROM ${tables}`);
+        const result = await this.engine.query(`SELECT * FROM ${tables[0]}`);
         return result.rows;
       } catch (error) {
         throw new Error('Error querying the database: ' + error.message);
@@ -58,7 +62,7 @@ class Postgresql extends Database {
 
   async getTotalCount(...keywords) {
     const tables = this.defineTableByKeyword(keywords);
-    if (tables) {
+    if (tables[0]) {
       try {
         const result = await this.engine.query(`SELECT COUNT(*) as total_count FROM ${tables}`);
         return result.rows[0];
@@ -72,9 +76,9 @@ class Postgresql extends Database {
 
   async getOneById(id, ...keywords) {
     const tables = this.defineTableByKeyword(keywords);
-    if (tables) {
+    if (tables[0]) {
       try {
-        const result = await this.engine.query(`SELECT * FROM ${tables} WHERE post_id = ${id}`);
+        const result = await this.engine.query(`SELECT * FROM ${tables[0]} WHERE post_id = ${id}`);
         return result.rows[0];
       } catch (error) {
         throw new Error('Error querying the database: Server Error');
