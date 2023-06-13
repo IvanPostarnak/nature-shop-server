@@ -2,11 +2,11 @@
   "name": "nature-shop-server",
   "version": "1.0.0",
   "description": "\"The Nature Shop server running on Expressjs\"",
-  "main": "server.js",
+  "main": "src/server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js",
-    "dev": "nodemon -L server.js"
+    "start": "node src/server.js",
+    "dev": "nodemon -L src/server.js"
   },
   "repository": {
     "type": "git",
