@@ -14,13 +14,13 @@ class PostController extends Controller {
     try {
       response.body = await this.database.getByQuery(filteredQuery, 'posts');
       response.count = response.body.length;
+      if (response.count === 0) {
+        response.code = 404;
+        response.body = `Posts by queries : '${JSON.stringify(queryObj)}' were not found`;
+      }
     } catch (err) {
       response.code = 500;
       response.body = err.message;
-    }
-    if (response.body.length === 0) {
-      response.code = 404;
-      response.body = `Posts by queries : '${JSON.stringify(queryObj)}' were not found`;
     }
     return response;
   }
@@ -30,13 +30,13 @@ class PostController extends Controller {
     try {
       response.body = await this.database.getAll('posts')
       response.count = response.body.length;
+      if (response.count === 0) {
+        response.code = 404;
+        response.body = `There are no any posts`;
+      }
     } catch (err) {
       response.code = 500;
       response.body = err.message;
-    }
-    if (response.count === 0) {
-      response.code = 404;
-      response.body = `There are no any posts`;
     }
     return response;
   }
@@ -56,13 +56,13 @@ class PostController extends Controller {
     let response = {code: 200, body: []};
     try {
       response.body = await this.database.getOneById(id, 'posts')
+      if (response.body === undefined) {
+        response.code = 404;
+        response.body = `Post with id '${id}' was not found`;
+      }
     } catch (err) {
       response.code = 500;
       response.body = err.message;
-    }
-    if (response.body === undefined) {
-      response.code = 404;
-      response.body = `Post with id '${id}' was not found`;
     }
     return response;
   }

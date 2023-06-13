@@ -11,13 +11,13 @@ class ProductController extends Controller {
     try {
       response.body = await this.database.getAll('products', infoMod);
       response.count = response.body.length;
+      if (response.count === 0) {
+        response.code = 404;
+        response.body = 'There are no any products';
+      }
     } catch (err) {
       response.code = 500;
       response.body = err.message;
-    }
-    if (response.count === 0) {
-      response.code = 404;
-      response.body = 'There are no any products';
     }
     return response;
   }
@@ -38,13 +38,13 @@ class ProductController extends Controller {
     try {
       response.body = await this.database.getOneById(id, 'products', infoMod);
       response.count = response.body.length;
+      if (response.count === 0) {
+        response.code = 404;
+        response.body = `There is no a product with id '${id}' and query '${infoMod}'`;
+      }
     } catch (err) {
       response.code = 500;
       response.body = err.message;
-    }
-    if (response.count === 0) {
-      response.code = 404;
-      response.body = `There is no a product with id '${id}' and query '${infoMod}'`;
     }
     return response;
   }
@@ -54,13 +54,13 @@ class ProductController extends Controller {
     try {
       response.body = await this.database.getAll('products', param);
       response.count = response.body.length;
+      if (response.count === 0) {
+        response.code = 404;
+        response.body = `There are no any products' ${param}`;
+      }
     } catch (err) {
       response.code = 500;
       response.body = err.message;
-    }
-    if (response.count === 0) {
-      response.code = 404;
-      response.body = `There are no any products' ${param}`;
     }
     return response;
   }
