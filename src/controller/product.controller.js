@@ -6,6 +6,22 @@ class ProductController extends Controller {
     super(database);
   }
 
+  async getAll(infoMod) {
+    let response = {code: 200, body: '', count: 0}
+    try {
+      response.body = await this.database.getAll('products', infoMod);
+      response.count = response.body.length;
+    } catch (err) {
+      response.code = 500;
+      response.body = err.message;
+    }
+    if (response.count === 0) {
+      response.code = 404;
+      response.body = 'There are no any products';
+    }
+    return response;
+  }
+
   async getTotalCount() {
     let response = {code: 200, body: ''}
     try {
@@ -17,10 +33,10 @@ class ProductController extends Controller {
     return response;
   }
 
-  async getBasic() {
+  async getOneById(id, infoMod) {
     let response = {code: 200, body: '', count: 0}
     try {
-      response.body = await this.database.getAll('products_basic');
+      response.body = await this.database.getOneById(id, 'products', infoMod);
       response.count = response.body.length;
     } catch (err) {
       response.code = 500;
@@ -28,23 +44,7 @@ class ProductController extends Controller {
     }
     if (response.count === 0) {
       response.code = 404;
-      response.body = 'There are not any products';
-    }
-    return response;
-  }
-
-  async getAll() {
-    let response = {code: 200, body: '', count: 0}
-    try {
-      response.body = await this.database.getAll('products_all');
-      response.count = response.body.length;
-    } catch (err) {
-      response.code = 500;
-      response.body = err.message;
-    }
-    if (response.count === 0) {
-      response.code = 404;
-      response.body = 'There are not any products';
+      response.body = `There is no a product with id '${id}' and query '${infoMod}'`;
     }
     return response;
   }
@@ -52,7 +52,7 @@ class ProductController extends Controller {
   async getSupport(param) {
     let response = {code: 200, body: '', count: 0}
     try {
-      response.body = await this.database.getAll(`products_${param}`);
+      response.body = await this.database.getAll('products', param);
       response.count = response.body.length;
     } catch (err) {
       response.code = 500;
@@ -60,7 +60,7 @@ class ProductController extends Controller {
     }
     if (response.count === 0) {
       response.code = 404;
-      response.body = `There are not any products' ${param}`;
+      response.body = `There are no any products' ${param}`;
     }
     return response;
   }

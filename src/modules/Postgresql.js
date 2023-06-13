@@ -8,42 +8,38 @@ class Postgresql extends Database {
     this.engine = engine;
   }
 
-  defineTableByKeyword (keywords) {
-    let tables = [];
-    for (let i in keywords) {
-      let tableName;
-      switch (keywords[i]) {
-        case 'posts':
-          tableName = 'post';
-          break;
-        case 'products':
-          tableName = 'product';
-          break;
-        case 'products_basic':
-          tableName = 'product_basic';
-          break;
-        case 'products_categories':
-          tableName = 'product_category';
-          break;
-        case 'products_forms':
-          tableName = 'product_form';
-          break;
-        case 'products_types':
-          tableName = 'product_type';
-          break;
-        case 'products_all':
-          tableName = 'product_everything';
-          break;
+  defineTable (keyword, infoMod) {
+    let table = {};
+    switch (keyword) {
+      case 'posts':
+        table = {name: 'post', column: 'post_id'};
+        break;
+      case 'products':
+        switch (infoMod) {
+          case 'full':
+            table = {name: 'product_everything', column: 'product_id'};
+            break;
+          case 'categories':
+            table = {name: 'product_category', column: 'product_category_id'};
+            break;
+          case 'forms':
+            table = {name: 'product_form', column: 'product_form_id'};
+            break;
+          case 'types':
+            table = {name: 'product_type', column: 'product_type_id'};
+            break;
+          default:
+            table = {name: 'product_basic', column: 'product_id'};
+            break;
+        }
       }
-      tableName && tables.push(tableName)
-    }
-    return tables;
+    return table;
   }
 
-  async getByQuery(queryObj, ...keywords) {
-    const tables = this.defineTableByKeyword(keywords);
-    if (tables[0]) {
-      const queryString = configureQuery(queryObj, tables[0]);
+  async getByQuery(queryObj, keyword, infoMod) {
+    const table = this.defineTable(keyword, infoMod);
+    if (table) {
+      const queryString = configureQuery(queryObj, table.name);
       console.log(queryString);
       try {
         const result = await this.engine.query(queryString);
@@ -52,50 +48,49 @@ class Postgresql extends Database {
         throw new Error('Error querying the database: ' + error.message);
       }
     } else {
-      throw new Error('Unmatching keyword parameter at getTotalCount method: ' + keywords);
+      throw new Error('Unmatching keyword parameter at getTotalCount method: ' + keyword);
     }
   } 
 
-  async getAll(...keywords) {
-    const tables = this.defineTableByKeyword(keywords);
-    console.log(tables);
-    if (tables[0]) {
+  async getAll(keyword, infoMod) {
+    const table = this.defineTable(keyword, infoMod);
+    if (table) {
       try {
-        const result = await this.engine.query(`SELECT * FROM ${tables[0]}`);
+        const result = await this.engine.query(`SELECT * FROM ${table.name}`);
         return result.rows;
       } catch (error) {
         throw new Error('Error querying the database: ' + error.message);
       }
     } else {
-      throw new Error('Unmatching keyword parameter at getTotalCount method: ' + keywords);
+      throw new Error('Unmatching keyword parameter at getTotalCount method: ' + keyword);
     }
   }
 
-  async getTotalCount(...keywords) {
-    const tables = this.defineTableByKeyword(keywords);
-    if (tables[0]) {
+  async getTotalCount(keyword, infoMod) {
+    const table = this.defineTable(keyword, infoMod);
+    if (table) {
       try {
-        const result = await this.engine.query(`SELECT COUNT(*) as total_count FROM ${tables}`);
+        const result = await this.engine.query(`SELECT COUNT(*) as total_count FROM ${table.name}`);
         return result.rows[0];
       } catch (error) {
         throw new Error('Error querying the database: Server Error');
       }
     } else {
-      throw new Error('Unmatching keyword parameter at getTotalCount method: ' + keywords);
+      throw new Error('Unmatching keyword parameter at getTotalCount method: ' + keyword);
     }
   }
 
-  async getOneById(id, ...keywords) {
-    const tables = this.defineTableByKeyword(keywords);
-    if (tables[0]) {
+  async getOneById(id, keyword, infoMod) {
+    const table = this.defineTable(keyword, infoMod);
+    if (table) {
       try {
-        const result = await this.engine.query(`SELECT * FROM ${tables[0]} WHERE post_id = ${id}`);
-        return result.rows[0];
+        const result = await this.engine.query(`SELECT * FROM ${table.name} WHERE ${table.column} = ${id}`);
+        return result.rows;
       } catch (error) {
         throw new Error('Error querying the database: Server Error');
       }
     } else {
-      throw new Error('Unmatching keyword parameter at getTotalCount method: ' + keywords);
+      throw new Error('Unmatching keyword parameter at getTotalCount method: ' + keyword);
     }
   }
 
