@@ -18,7 +18,7 @@ class Postgresql extends Database {
     const table = this.defineTable(keyword, infoMod);
     if (table) {
       const queryString = configureTableQuery(queryObj, table);
-      console.log(queryString);
+      console.log('query string: \n' + queryString);
       try {
         const result = await this.engine.query(queryString);
         return result.rows;
@@ -26,7 +26,7 @@ class Postgresql extends Database {
         throw new Error('Error querying the database: ' + error.message);
       }
     } else {
-      throw new Error('Unmatching keyword parameter at getTotalCount method: ' + keyword);
+      throw new Error(`Unable to define table by params : ${[keyword, infoMod]}]'${table}' at \'getByQuery()\' method`);
     }
   } 
 
@@ -40,7 +40,7 @@ class Postgresql extends Database {
         throw new Error('Error querying the database: ' + error.message);
       }
     } else {
-      throw new Error('Unmatching keyword parameter at getTotalCount method: ' + keyword);
+      throw new Error(`Unable to define table by params : ${[keyword, infoMod]}]'${table}' at \'getAll()\' method`);
     }
   }
 
@@ -54,7 +54,7 @@ class Postgresql extends Database {
         throw new Error('Error querying the database: Server Error');
       }
     } else {
-      throw new Error('Unmatching keyword parameter at getTotalCount method: ' + keyword);
+      throw new Error(`Unable to define table by params : ${[keyword, infoMod]}]'${table}' at \'getTotalCount()\' method`);
     }
   }
 
@@ -68,16 +68,8 @@ class Postgresql extends Database {
         throw new Error('Error querying the database: Server Error');
       }
     } else {
-      throw new Error('Unmatching keyword parameter at getTotalCount method: ' + keyword);
+      throw new Error(`Unable to define table by params : ${[keyword, infoMod]}]'${table}' at \'getOneById()\' method`);
     }
-  }
-
-  connect() {
-    return this.engine.connect();
-  }
-
-  end() {
-    return this.engine.end();
   }
 };
 
