@@ -1,4 +1,4 @@
-const pgEngine = require("../config/postgresql");
+const pgEngine = require("../config/postgresql.config");
 const Database = require('../entity/Database');
 const configureTableQuery = require("../helpers/configureTableQuery");
 const Dictionary = require("./Dictionary");
