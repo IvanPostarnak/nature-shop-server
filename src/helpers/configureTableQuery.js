@@ -1,9 +1,9 @@
 const numberToTimestamp = require('./numberToTimestamp');
 
-const configureQuery = (queryObj, table) => {
-  const startOfQuery = `SELECT * from ${table} `;
+const configureTableQuery = (queryObj, tableName) => {
+  const startOfQuery = `SELECT * from ${tableName} `;
   const query = {
-    postIdAddon: `WHERE (${table}_id >= ${queryObj.start || 0}${queryObj.end ? ` AND ${table}_id <= ${queryObj.end})` : ')'}`,
+    postIdAddon: `WHERE (${tableName}_id >= ${queryObj.start || 0}${queryObj.end ? ` AND ${tableName}_id <= ${queryObj.end})` : ')'}`,
     authorAddon: `${queryObj.author ? ` AND (author_id = ${queryObj.author})` : ''}`,
     language: `${queryObj.language ? ` AND (language_id = ${queryObj.language})` : ''}`,
     rating: `${queryObj.rating ? ` AND (rating_5 = ${queryObj.rating})` : ''}`,
@@ -18,4 +18,4 @@ const configureQuery = (queryObj, table) => {
   return startOfQuery + Object.values(query).reduce((acc, value) => acc + value, []) + limitAddon;
 }
 
-module.exports = configureQuery;
+module.exports = configureTableQuery;

@@ -1,6 +1,6 @@
 const pgEngine = require("../config/postgresql");
 const Database = require('../entity/Database');
-const configureQuery = require("../helpers/configureQuery");
+const configureTableQuery = require("../helpers/configureTableQuery");
 
 class Postgresql extends Database {
   constructor (engine) {
@@ -12,24 +12,24 @@ class Postgresql extends Database {
     let table = {};
     switch (keyword) {
       case 'posts':
-        table = {name: 'post', column: 'post_id'};
+        table = {name: 'post', column: 'post_id', type: 'table'};
         break;
       case 'products':
         switch (infoMod) {
           case 'full':
-            table = {name: 'product_everything', column: 'product_id'};
+            table = {name: 'product_everything', column: 'product_id', type: 'json'};
             break;
           case 'categories':
-            table = {name: 'product_category', column: 'product_category_id'};
+            table = {name: 'product_category', column: 'product_category_id', type: 'table'};
             break;
           case 'forms':
-            table = {name: 'product_form', column: 'product_form_id'};
+            table = {name: 'product_form', column: 'product_form_id', type: 'table'};
             break;
           case 'types':
-            table = {name: 'product_type', column: 'product_type_id'};
+            table = {name: 'product_type', column: 'product_type_id', type: 'table'};
             break;
           default:
-            table = {name: 'product_basic', column: 'product_id'};
+            table = {name: 'product_basic', column: 'product_id', type: 'json'};
             break;
         }
       }
@@ -39,7 +39,7 @@ class Postgresql extends Database {
   async getByQuery(queryObj, keyword, infoMod) {
     const table = this.defineTable(keyword, infoMod);
     if (table) {
-      const queryString = configureQuery(queryObj, table.name);
+      const queryString = configureTableQuery(queryObj, table.name);
       console.log(queryString);
       try {
         const result = await this.engine.query(queryString);
