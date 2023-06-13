@@ -1,9 +1,9 @@
 const numberToTimestamp = require('./numberToTimestamp');
 
-const configureTableQuery = (queryObj, tableName) => {
-  const startOfQuery = `SELECT * from ${tableName} `;
+const configureTableQuery = (queryObj, table) => {
+  const startOfQuery = `SELECT * from ${table.name} `;
   const query = {
-    postIdAddon: `WHERE (${tableName}_id >= ${queryObj.start || 0}${queryObj.end ? ` AND ${tableName}_id <= ${queryObj.end})` : ')'}`,
+    postIdAddon: `WHERE (${table.column} >= ${queryObj.start || 0}${queryObj.end ? ` AND ${table.column} <= ${queryObj.end})` : ')'}`,
     authorAddon: `${queryObj.author ? ` AND (author_id = ${queryObj.author})` : ''}`,
     language: `${queryObj.language ? ` AND (language_id = ${queryObj.language})` : ''}`,
     rating: `${queryObj.rating ? ` AND (rating_5 = ${queryObj.rating})` : ''}`,
@@ -12,6 +12,7 @@ const configureTableQuery = (queryObj, tableName) => {
     create_ts: `${queryObj.create_ts ? ` AND (create_ts >= to_timestamp('${numberToTimestamp(queryObj.create_ts)}', 'YYYY-MM-DD HH24:MI:SS'))` : ''}`,
     title: `${queryObj.title ? ` AND (title ILIKE '%${queryObj.title}%')` : ''}`,
     content: `${queryObj.content ? ` AND (content ILIKE '%${queryObj.content}%')` : ''}`,
+    name: `${queryObj.name ? ` AND (name ILIKE '%${queryObj.name}%')` : ''}`,
   }
   const limitAddon = `${queryObj.limit ? ` LIMIT ${queryObj.limit}` : ''}`;
 

@@ -9,7 +9,7 @@ class Postgresql extends Database {
   }
 
   defineTable (keyword, infoMod) {
-    let table = {};
+    let table = null;
     switch (keyword) {
       case 'posts':
         table = {name: 'post', column: 'post_id', type: 'table'};
@@ -39,7 +39,7 @@ class Postgresql extends Database {
   async getByQuery(queryObj, keyword, infoMod) {
     const table = this.defineTable(keyword, infoMod);
     if (table) {
-      const queryString = configureTableQuery(queryObj, table.name);
+      const queryString = configureTableQuery(queryObj, table);
       console.log(queryString);
       try {
         const result = await this.engine.query(queryString);

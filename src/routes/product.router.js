@@ -1,6 +1,30 @@
 const ProductController = require('../controller/product.controller');
 const ProductRouter = require('express').Router();
 const infoQuery = require('../middleware/infoQuery');
+const limitQuery = require('../middleware/limitQuery');
+const startQuery = require('../middleware/startQuery');
+const endQuery = require('../middleware/endQuery');
+const nameQuery = require('../middleware/nameQuery');
+
+ProductRouter.route('/')
+             .get(
+               infoQuery,
+               startQuery,
+               endQuery,
+               limitQuery,
+               nameQuery,
+               async (req, res) => {
+                 const response = await ProductController.getByQuery({
+                  start: req.start,
+                  end: req.end,
+                  limit: req.limit,
+                  name: req.name
+                 }, req.info_mod);
+                 res.set('X-Total-Amount', (await ProductController.getTotalCount()).body.total_count);
+                 res.set('X-Current-Amount', response.count);
+                 res.status(response.code).json(response.body);
+               }
+             );
 
 ProductRouter.route('/all')
              .get(
