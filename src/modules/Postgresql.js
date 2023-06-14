@@ -26,7 +26,7 @@ class Postgresql extends Database {
         throw new Error('Error querying the database: ' + error.message);
       }
     } else {
-      throw new Error(`Unable to define table by params : ${[keyword, infoMod]}] at \'getByQuery()\' method`);
+      throw new Error(`Unable to define table by params : '${[keyword, infoMod]}' at \'getByQuery()\' method`);
     }
   } 
 
@@ -40,7 +40,7 @@ class Postgresql extends Database {
         throw new Error('Error querying the database: ' + error.message);
       }
     } else {
-      throw new Error(`Unable to define table by params : ${[keyword, infoMod]}] at \'getAll()\' method`);
+      throw new Error(`Unable to define table by params : '${[keyword, infoMod]}' at \'getAll()\' method`);
     }
   }
 
@@ -54,7 +54,7 @@ class Postgresql extends Database {
         throw new Error('Error querying the database: Server Error');
       }
     } else {
-      throw new Error(`Unable to define table by params : ${[keyword, infoMod]}] at \'getTotalCount()\' method`);
+      throw new Error(`Unable to define table by params : '${[keyword, infoMod]}' at \'getTotalCount()\' method`);
     }
   }
 
@@ -68,7 +68,7 @@ class Postgresql extends Database {
         throw new Error('Error querying the database: Server Error');
       }
     } else {
-      throw new Error(`Unable to define table by params : ${[keyword, infoMod]}] at \'getOneById()\' method`);
+      throw new Error(`Unable to define table by params : '${[keyword, infoMod]}' at \'getOneById()\' method`);
     }
   }
 };

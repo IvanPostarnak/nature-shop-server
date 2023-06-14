@@ -22,6 +22,17 @@ class CustomerController extends Controller {
     }
     return response;
   }
+
+  async getTotalCount() {
+    let response = {code: 200, body: ''}
+    try {
+      response.body = await this.database.getTotalCount('customers')
+    } catch (err) {
+      response.code = 500;
+      response.body = err.message;
+    }
+    return response;
+  }
 }
 
 module.exports = new CustomerController(Postgresql);

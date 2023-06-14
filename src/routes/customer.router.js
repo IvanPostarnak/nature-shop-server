@@ -12,4 +12,10 @@ CustomerRouter.route('/all')
                 }
               );
 
+CustomerRouter.route('/total_count')
+              .get(async (req, res) => {
+                const response = await CustomerController.getTotalCount();
+                res.status(response.code).json(response.body);
+              });
+
 module.exports = CustomerRouter;
