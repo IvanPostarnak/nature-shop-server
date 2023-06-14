@@ -1,0 +1,1 @@
+1. Right now (14.06.2023) we are reading query params by specific middleware functions, such as 'idQuery', 'infoQuery', 'authorQuery' etc. But there are such queries as 'name' and 'title', for example, so they are similar but not totaly equal. Perhaps, it is not very good practice to create so many special middleware functions, instead of convertation them into something common.

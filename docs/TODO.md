@@ -1,0 +1,4 @@
+- [ ] To create a common Error() object, to invoke similar error messages easily
+- [ ] To attach testing scripts for whole server
+- [ ] To solve comming issues with security: add an area check (check of source of request)
+- [ ] To wrap whole server in the docker container
