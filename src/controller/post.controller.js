@@ -15,7 +15,7 @@ class PostController extends Controller {
       response.count = response.body.length;
       if (response.count === 0) {
         response.code = 404;
-        response.body = `Posts by queries : '${JSON.stringify(queryObj)}' were not found`;
+        response.body = `Posts by queries : '${JSON.stringify(filteredQuery)}' were not found`;
       }
     } catch (err) {
       response.code = 500;
@@ -31,7 +31,7 @@ class PostController extends Controller {
       response.count = response.body.length;
       if (response.count === 0) {
         response.code = 404;
-        response.body = `There are no any posts`;
+        response.body = `There are not any posts`;
       }
     } catch (err) {
       response.code = 500;

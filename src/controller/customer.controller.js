@@ -58,7 +58,7 @@ class CustomerController extends Controller {
       response.count = response.body.length;
       if (response.count === 0) {
         response.code = 404;
-        response.body = `There are not any support relations matching: '${param}' by query ''${JSON.stringify(filteredQuery)}'`;
+        response.body = `There are not any support relations matching: '${param}' by query '${JSON.stringify(filteredQuery)}'`;
       }
     } catch (err) {
       response.code = 500;

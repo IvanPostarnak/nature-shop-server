@@ -15,7 +15,7 @@ class ProductController extends Controller {
       response.count = response.body.length;
       if (response.count === 0) {
         response.code = 404;
-        response.body = `Products by queries : '${JSON.stringify(queryObj)}' were not found`;
+        response.body = `Products by queries : '${JSON.stringify(filteredQuery)}' were not found`;
       }
     } catch (err) {
       response.code = 500;
@@ -31,7 +31,7 @@ class ProductController extends Controller {
       response.count = response.body.length;
       if (response.count === 0) {
         response.code = 404;
-        response.body = 'There are no any products';
+        response.body = 'There are not any products';
       }
     } catch (err) {
       response.code = 500;
@@ -58,7 +58,7 @@ class ProductController extends Controller {
       response.count = response.body.length;
       if (response.count === 0) {
         response.code = 404;
-        response.body = `There is no a product with id '${id}' and query '${infoMod}'`;
+        response.body = `There is not a product with id '${id}' and query '${infoMod}'`;
       }
     } catch (err) {
       response.code = 500;
@@ -74,7 +74,7 @@ class ProductController extends Controller {
       response.count = response.body.length;
       if (response.count === 0) {
         response.code = 404;
-        response.body = `There are no any products' ${param}`;
+        response.body = `There are not any products' ${param}`;
       }
     } catch (err) {
       response.code = 500;
