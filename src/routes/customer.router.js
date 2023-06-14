@@ -18,4 +18,13 @@ CustomerRouter.route('/total_count')
                 res.status(response.code).json(response.body);
               });
 
+CustomerRouter.route('/:id')
+              .get(
+                infoQuery,
+                async (req, res) => {
+                  const response = await CustomerController.getOneById(req.params.id, req.info_mod);
+                  res.status(response.code).json(response.body);
+                }
+              );
+
 module.exports = CustomerRouter;
