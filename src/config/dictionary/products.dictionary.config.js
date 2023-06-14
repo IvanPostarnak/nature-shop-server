@@ -22,6 +22,30 @@ const productsDictionary = new Map()
 .set(
   'products types',
   {name: 'product_type', column: 'product_type_id', type: 'table'}
+)
+.set(
+  'products data',
+  {name: 'product_data', column: 'product_id', type: 'table'}
+)
+.set(
+  'products info',
+  {name: 'product_info', column: 'product_id', type: 'table'}
+)
+.set(
+  'products points',
+  {name: 'product_points', column: 'product_id', type: 'table'}
+)
+.set(
+  'products price',
+  {name: 'product_price', column: 'product_id', type: 'table'}
+)
+.set(
+  'products rating',
+  {name: 'product_rating', column: 'product_id', type: 'table'}
+)
+.set(
+  'products size',
+  {name: 'product_size', column: 'product_id', type: 'table'}
 );
 
 module.exports = productsDictionary;

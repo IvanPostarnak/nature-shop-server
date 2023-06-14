@@ -5,6 +5,7 @@ const limitQuery = require('../middleware/limitQuery');
 const startQuery = require('../middleware/startQuery');
 const endQuery = require('../middleware/endQuery');
 const nameQuery = require('../middleware/nameQuery');
+const idQuery = require('../middleware/idQuery');
 
 ProductRouter.route('/')
              .get(
@@ -52,10 +53,16 @@ ProductRouter.route('/:id')
              );
 
 ProductRouter.route('/support/:arg')
-             .get(async (req, res) => {
-               const response = await ProductController.getSupport(req.params.arg);
-               res.set('X-Total-Amount', response.count);
-               res.status(response.code).json(response.body);
-             });             
+             .get(
+               idQuery,
+               async (req, res) => {
+                 const response = await ProductController.getSupport({
+                  id: req.id
+                 }, req.params.arg);
+                 res.set('X-Total-Amount', (await ProductController.getTotalCount()).body.total_count);
+                 res.set('X-Current-Amount', response.count);
+                 res.status(response.code).json(response.body);
+               }
+             );             
 
 module.exports = ProductRouter;

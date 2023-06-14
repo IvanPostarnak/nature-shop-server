@@ -67,14 +67,15 @@ class ProductController extends Controller {
     return response;
   }
 
-  async getSupport(param) {
-    let response = {code: 200, body: '', count: 0}
+  async getSupport(queryObj, param) {
+    let response = {code: 200, body: '', count: 0};
+    const filteredQuery = filterObjectByValue(queryObj);
     try {
-      response.body = await this.database.getAll('products', param);
+      response.body = await this.database.getByQuery(filteredQuery, 'products', param);
       response.count = response.body.length;
       if (response.count === 0) {
         response.code = 404;
-        response.body = `There are not any products' ${param}`;
+        response.body = `There are not any support relations matching: '${param}' by query '${JSON.stringify(filteredQuery)}'`;
       }
     } catch (err) {
       response.code = 500;
