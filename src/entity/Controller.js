@@ -1,7 +1,7 @@
-class HomeController {
+class Controller {
   constructor (database) {
     this.database = database;
   }
 }
 
-module.exports = HomeController;
+module.exports = Controller;
