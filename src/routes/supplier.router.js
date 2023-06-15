@@ -14,4 +14,10 @@ SupplierRouter.route('/total_count')
                 res.status(response.code).json(response.body);
               });
 
+SupplierRouter.route('/:id')
+              .get(async (req, res) => {
+                const response = await SupplierController.getOneById(req.params.id);
+                res.status(response.code).json(response.body);
+              });
+
 module.exports = SupplierRouter;
