@@ -9,7 +9,7 @@ const customerDictionary = new Map()
 )
 .set(
   'customers full',
-  {name: 'customer_everything', column: 'customer_id', type: 'json'}
+  {name: 'customer_full', column: 'customer_id', type: 'json'}
 )
 .set(
   'customers bio',

@@ -1,7 +1,7 @@
 const pgEngine = require("../config/postgresql.config");
 const Database = require('../entity/Database');
 const configureTableQuery = require("../helpers/configureTableQuery");
-const Dictionary = require("./Dictionary");
+const Dictionary = require("../entity/Dictionary");
 
 class Postgresql extends Database {
   constructor (engine, dictionary) {

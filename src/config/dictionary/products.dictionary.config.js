@@ -1,15 +1,15 @@
 const productsDictionary = new Map()
 .set(
   'products',
-  {name: 'product_basic', column: 'product_id', type: 'json'}
+  {name: 'product_basic_web', column: 'product_id', type: 'json'}
 )
 .set(
   'products basic',
-  {name: 'product_basic', column: 'product_id', type: 'json'}
+  {name: 'product_basic_web', column: 'product_id', type: 'json'}
 )
 .set(
   'products full',
-  {name: 'product_everything', column: 'product_id', type: 'json'}
+  {name: 'product_full_web', column: 'product_id', type: 'json'}
 )
 .set(
   'products categories',

@@ -6,7 +6,9 @@ class Dictionary {
   }
 
   configureKey(params) {
-    const filteredArray = Array.from(params).filter(elem => elem != undefined);
+    const filteredArray = Array.from(params).filter(elem => {
+      return elem != undefined && elem != -1
+    });
     const string = filteredArray.reduce((acc, arg) => acc += `${arg} `, '').trim();
     return string;
   }
