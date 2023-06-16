@@ -10,6 +10,7 @@ const SupplierRouter = require('./routes/supplier.router');
 const ShipperRouter = require('./routes/shipper.router');
 const ShopRouter = require('./routes/shop.router');
 const EmployeeRouter = require('./routes/employee.router');
+const PurchaseRouter = require('./routes/purchase.router');
 
 const server = express();
 
@@ -25,6 +26,7 @@ server.use('/suppliers', SupplierRouter);
 server.use('/shippers', ShipperRouter);
 server.use('/shops', ShopRouter);
 server.use('/employees', EmployeeRouter);
+server.use('/purchases', PurchaseRouter);
 
 server.listen(process.env.PORT, () => {
   console.log(`Server started at ${process.env.PORT} port`)
