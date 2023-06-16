@@ -18,4 +18,14 @@ PurchaseRouter.route('/total_count')
                 res.status(response.code).json(response.body);
               });
 
+PurchaseRouter.route('/:id')
+              .get(
+                infoQuery,
+                async (req, res) => {
+                  const response = await PurchaseController.getOneById(req.params.id, req.info_mod);
+                  res.set('X-Total-Amount', response.count);
+                  res.status(response.code).json(response.body);
+                }
+              );
+
 module.exports = PurchaseRouter;
