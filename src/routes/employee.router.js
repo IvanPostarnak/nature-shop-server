@@ -18,4 +18,13 @@ EmployeeRouter.route('/total_count')
                 res.status(response.code).json(response.body);
               });
 
+EmployeeRouter.route('/:id')
+              .get(
+                infoQuery,
+                async (req, res) => {
+                  const response = await EmployeeController.getOneById(req.params.id, req.info_mod);
+                  res.status(response.code).json(response.body);
+                }
+              );
+
 module.exports = EmployeeRouter;
