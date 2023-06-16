@@ -52,4 +52,23 @@ PurchaseRouter.route('/:id')
                 }
               );
 
+PurchaseRouter.route('/support/:arg')
+              .get(
+                idQuery,
+                startQuery,
+                endQuery,
+                limitQuery,
+                async (req, res) => {
+                  const response = await PurchaseController.getSupport({
+                    id: req.id,
+                    start: req.start,
+                    end: req.end,
+                    limit: req.limit
+                  }, req.params.arg);
+                  res.set('X-Total-Amount', (await PurchaseController.getTotalCount()).body.total_count);
+                  res.set('X-Current-Amount', response.count);
+                  res.status(response.code).json(response.body);
+                }
+              );
+
 module.exports = PurchaseRouter;
