@@ -66,6 +66,23 @@ class EmployeeController extends Controller {
     }
     return response;
   }
+
+  async getSupport(queryObj, param) {
+    let response = {code: 200, body: '', count: 0};
+    const filteredQuery = filterObjectByValue(queryObj);
+    try {
+      response.body = await this.database.getByQuery(filteredQuery, 'employees', param);
+      response.count = response.body.length;
+      if (response.count === 0) {
+        response.code = 404;
+        response.body = `There are not any support relations matching: '${param}' by query '${JSON.stringify(filteredQuery)}'`;
+      }
+    } catch (err) {
+      response.code = 500;
+      response.body = err.message;
+    }
+    return response;
+  }
 }
 
 module.exports = new EmployeeController(Postgresql);
