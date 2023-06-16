@@ -50,6 +50,22 @@ class ShopController extends Controller {
     }
     return response;
   }
+
+  async getOneById(id, infoMod) {
+    let response = {code: 200, body: '', count: 0}
+    try {
+      response.body = await this.database.getOneById(id, 'shops', infoMod);
+      response.count = response.body.length;
+      if (response.count === 0) {
+        response.code = 404;
+        response.body = `There is not a shop with id '${id}' and query '${infoMod}'`;
+      }
+    } catch (err) {
+      response.code = 500;
+      response.body = err.message;
+    }
+    return response;
+  }
 }
 
 module.exports = new ShopController(Postgresql);

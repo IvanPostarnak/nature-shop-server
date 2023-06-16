@@ -31,4 +31,14 @@ ShopRouter.route('/support/:arg')
               res.status(response.code).json(response.body);
             }
           );
+
+ShopRouter.route('/:id')
+          .get(
+            infoQuery,
+            async (req, res) => {
+              const response = await ShopController.getOneById(req.params.id, req.info_mod);
+              res.status(response.code).json(response.body);
+            }
+          );
+
 module.exports = ShopRouter;
