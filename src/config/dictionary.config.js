@@ -1,4 +1,5 @@
 const customerDictionary = require('./dictionary/customers.dictionary.config');
+const employeesDictionary = require('./dictionary/employee.dictionary.config');
 const postsDictionary = require('./dictionary/posts.dictionary.config');
 const productsDictionary = require('./dictionary/products.dictionary.config');
 const shippersDictionary = require('./dictionary/shippers.dictionary.config');
@@ -13,7 +14,8 @@ const dictionary = new Map([
   ...customerDictionary,
   ...suppliersDictionary,
   ...shippersDictionary,
-  ...shopsDictionary
+  ...shopsDictionary,
+  ...employeesDictionary
 ]);
 
 module.exports = dictionary;
