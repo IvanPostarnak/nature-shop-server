@@ -14,4 +14,10 @@ ShipperRouter.route('/total_count')
                res.status(response.code).json(response.body);
              });
 
+ShipperRouter.route('/:id')
+             .get(async (req, res) => {
+               const response = await ShipperController.getOneById(req.params.id);
+               res.status(response.code).json(response.body);
+             });
+
 module.exports = ShipperRouter;

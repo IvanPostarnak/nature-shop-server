@@ -33,6 +33,22 @@ class ShipperController extends Controller {
     }
     return response;
   }
+
+  async getOneById(id) {
+    let response = {code: 200, body: '', count: 0}
+    try {
+      response.body = await this.database.getOneById(id, 'shippers');
+      response.count = response.body.length;
+      if (response.count === 0) {
+        response.code = 404;
+        response.body = `There is not a shipper with id '${id}'`;
+      }
+    } catch (err) {
+      response.code = 500;
+      response.body = err.message;
+    }
+    return response;
+  }
 }
 
 module.exports = new ShipperController(Postgresql);
