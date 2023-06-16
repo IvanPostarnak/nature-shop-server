@@ -1,6 +1,23 @@
 const ShopController = require('../controller/shop.controller');
 const idQuery = require('../middleware/idQuery');
+const infoQuery = require('../middleware/infoQuery');
 const ShopRouter = require('express').Router();
+
+ShopRouter.route('/all')
+          .get(
+            infoQuery,
+            async (req, res) => {
+              const response = await ShopController.getAll(req.info_mod);
+              res.set('X-Total-Amount', res.count);
+              res.status(response.code).json(response.body);
+            }
+          );
+
+ShopRouter.route('/total_count')
+          .get(async (req, res) => {
+            const response = await ShopController.getTotalCount();
+            res.status(response.code).json(response.body);
+          });
 
 ShopRouter.route('/support/:arg')
           .get(
@@ -14,10 +31,4 @@ ShopRouter.route('/support/:arg')
               res.status(response.code).json(response.body);
             }
           );
-ShopRouter.route('/total_count')
-          .get(async (req, res) => {
-            const response = await ShopController.getTotalCount();
-            res.status(response.code).json(response.body);
-          });
-
 module.exports = ShopRouter;

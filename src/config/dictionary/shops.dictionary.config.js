@@ -1,7 +1,15 @@
 const shopsDictionary = new Map()
 .set(
   'shops',
-  {name: 'shop', column: 'shop_id', type: 'table'}
+  {name: 'shop_basic', column: 'shop_id', type: 'table'}
+)
+.set(
+  'shops basic',
+  {name: 'shop_basic', column: 'shop_id', type: 'table'}
+)
+.set(
+  'shops full',
+  {name: 'shop_full', column: 'shop_id', type: 'table'}
 )
 .set(
   'shops addr',
