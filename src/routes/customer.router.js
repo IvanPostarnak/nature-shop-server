@@ -5,6 +5,7 @@ const idQuery = require('../middleware/idQuery');
 const infoQuery = require('../middleware/infoQuery');
 const limitQuery = require('../middleware/limitQuery');
 const startQuery = require('../middleware/startQuery');
+const methodQuery = require('../middleware/methodQuery');
 
 CustomerRouter.route('/')
               .get(
@@ -13,12 +14,14 @@ CustomerRouter.route('/')
                 startQuery,
                 endQuery,
                 limitQuery,
+                methodQuery,
                 async (req, res) => {
                   const response = await CustomerController.getByQuery({
                     id: req.id,
                     start: req.start,
                     end: req.end,
                     limit: req.limit,
+                    method: req.method
                   }, req.info_mod);
                   res.set('X-Total-Amount', (await CustomerController.getTotalCount()).body.total_count);
                   res.set('X-Current-Amount', response.count);
