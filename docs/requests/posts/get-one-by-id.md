@@ -38,7 +38,7 @@ localhost:5300/posts/23
 
 ## Response :package:
 ### headers
-```json
+```
 X-Powered-By    : Express
 Content-Type    : application/json; charset=utf-8
 Content-Length  : 2758
@@ -74,20 +74,20 @@ Content-Length  : 2758
 ## Error :heavy_exclamation_mark:
 ### 404: Not found
 *Client-side will recieve this response once there are no posts in the database*
-```json
+```
 response.code = 404
 ```
-```json
+```
 response.body =
 
 "Post with id '23' was not found"
 ```
 ### 505: Server Error
 *Server-side will send this response once something bad happened on the server side*
-```json
+```
 response.code = 500
 ```
-```json
+```
 response.body =
 
 // this

@@ -32,7 +32,7 @@ localhost:5300/posts/total_count
 
 ## Response :package:
 ### headers
-```json
+```
 X-Powered-By    : Express
 Content-Type    : application/json; charset=utf-8
 Content-Length  : 21
@@ -47,10 +47,10 @@ Content-Length  : 21
 ## Error :heavy_exclamation_mark:
 ### 505: Server Error
 *Server-side will send this response once something bad happened on the server side*
-```json
+```
 response.code = 500
 ```
-```json
+```
 response.body =
 
 // this

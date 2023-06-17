@@ -33,7 +33,7 @@ localhost:5300/posts/all
 
 ## Response :package:
 ### headers
-```json
+```
 X-Powered-By    : Express
 X-Total-Amount  : 100
 Content-Type    : application/json; charset=utf-8
@@ -44,7 +44,6 @@ Content-Length  : 343182
 ### body
 ```json
 [
-  ...
   {
     "post_id": 3,
     "title": "BodyPart Arms&Hands",
@@ -67,26 +66,25 @@ Content-Length  : 343182
     "created": "2023-05-29T00:17:44.877Z",
     "edited": "2023-05-29T00:17:44.877Z"
   }
-  ...
 ]
 ```
 ## Error :heavy_exclamation_mark:
 ### 404: Not found
 *Client-side will recieve this response once there are no posts in the database*
-```json
+```
 response.code = 404
 ```
-```json
+```
 response.body =
 
 "There are not any posts"
 ```
 ### 505: Server Error
 *Server-side will send this response once something bad happened on the server side*
-```json
+```
 response.code = 500
 ```
-```json
+```
 response.body =
 
 // this

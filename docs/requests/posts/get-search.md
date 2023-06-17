@@ -28,7 +28,7 @@ localhost:5300/posts/search
 
 ## Query parameters :pencil:
 All query params should go right there:
-```json
+```
 localhost:5300/posts/search?title=<value>&content=<value>&...
 ```
 This is a list of available query params for this endpoint:
@@ -40,7 +40,7 @@ This is a list of available query params for this endpoint:
 
 ## Response :package:
 ### headers
-```json
+```
 X-Powered-By      : Express
 X-Total-Amount    : 100
 X-Current-Amount  : 57
@@ -53,7 +53,6 @@ Content-Length    : 191803
 ### body
 ```json
 [
-  ...
   {
     "post_id": 3,
     "title": "BodyPart Arms&Hands",
@@ -76,16 +75,15 @@ Content-Length    : 191803
     "created": "2023-05-29T00:17:44.877Z",
     "edited": "2023-05-29T00:17:44.877Z"
   }
-  ...
 ]
 ```
 ## Error :heavy_exclamation_mark:
 ### 404: Not found
 *Client-side will recieve this response once there are no posts in the database*
-```json
+```
 response.code = 404
 ```
-```json
+```
 response.headers =
 
 X-Powered-By      : Express
@@ -93,17 +91,17 @@ X-Total-Amount    : 100
 X-Current-Amount  : 0
 ...                 ...
 ```
-```json
+```
 response.body =
 
 "Posts by queries : '{..., ..., ...}' were not found"
 ```
 ### 505: Server Error
 *Server-side will send this response once something bad happened on the server side*
-```json
+```
 response.code = 500
 ```
-```json
+```
 response.body =
 
 // this
