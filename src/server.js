@@ -30,6 +30,8 @@ server.use('/shops', ShopRouter);
 server.use('/employees', EmployeeRouter);
 server.use('/purchases', PurchaseRouter);
 
-server.listen(process.env.PORT, () => {
-  console.log(`Server started at ${process.env.PORT} port`)
+const PORT = process.env.PORT || 5300;
+
+server.listen(PORT, () => {
+  console.log(`Server started at ${PORT} port`)
 });
