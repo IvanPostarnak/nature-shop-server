@@ -1,6 +1,4 @@
 const PostRouter = require('express').Router();
-const languageQuery = require('../middleware/query/language.query');
-const authorQuery = require('../middleware/query/author.query');
 const ratingQuery = require('../middleware/query/rating.query');
 const votesQuery = require('../middleware/query/votes.query');
 const visitedQuery = require('../middleware/query/visited.query');
@@ -15,8 +13,6 @@ const methodQuery = require('../middleware/query/method.query');
 
 PostRouter.route('/')
           .get(
-            languageQuery,
-            authorQuery,
             ratingQuery,
             votesQuery,
             visitedQuery,
