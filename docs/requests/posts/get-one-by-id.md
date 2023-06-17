@@ -12,7 +12,6 @@ This request allow client to get information about one post by setting it's 'id'
   - [Error :heavy\_exclamation\_mark:](#error-heavy_exclamation_mark)
     - [404: Not found](#404-not-found)
     - [505: Server Error](#505-server-error)
-----
 
 ## Endpoint :motorway:
 Mainly, you should set your own PORT once you want to run server
@@ -29,12 +28,10 @@ localhost:5300/posts/:id
 localhost:5300/posts/23
 ```
 
-----
 
 ## Query parameters :pencil:    
 *This request does not have and does not accept any of query parameters*
 
-----
 
 ## Response :package:
 ### headers

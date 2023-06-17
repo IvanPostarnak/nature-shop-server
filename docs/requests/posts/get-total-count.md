@@ -11,7 +11,6 @@ This request allow client to get amount of all posts in the database
     - [body](#body)
   - [Error :heavy\_exclamation\_mark:](#error-heavy_exclamation_mark)
     - [505: Server Error](#505-server-error)
-----
 
 ## Endpoint :motorway:
 Mainly, you should set your own PORT once you want to run server
@@ -23,12 +22,10 @@ So total_amount will be available at this endpoint
 ```
 localhost:5300/posts/total_count
 ```
-----
 
 ## Query parameters :pencil:    
 *This request does not have and does not accept any of query parameters*
 
-----
 
 ## Response :package:
 ### headers

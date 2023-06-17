@@ -12,7 +12,6 @@ This request allow client to get all posts
   - [Error :heavy\_exclamation\_mark:](#error-heavy_exclamation_mark)
     - [404: Not found](#404-not-found)
     - [505: Server Error](#505-server-error)
-----
 
 ## Endpoint :motorway:
 Mainly, you should set your own PORT once you want to run server
@@ -24,7 +23,6 @@ So posts will be available at this endpoint
 ```
 localhost:5300/posts/search
 ```
-----
 
 ## Query parameters :pencil:
 All query params should go right there:
@@ -36,7 +34,6 @@ This is a list of available query params for this endpoint:
 - [content](../query.md#content)
 - [method](../query.md#method)
 
-----
 
 ## Response :package:
 ### headers
