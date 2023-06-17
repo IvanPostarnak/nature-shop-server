@@ -1,8 +1,8 @@
 const SupplierRouter = require('express').Router();
 const SupplierController = require('../controller/supplier.controller');
-const idQuery = require('../middleware/idQuery');
-const nameQuery = require('../middleware/nameQuery');
-const methodQuery = require('../middleware/methodQuery');
+const idQuery = require('../middleware/query/id.query');
+const nameQuery = require('../middleware/query/name.query');
+const methodQuery = require('../middleware/query/method.query');
 
 SupplierRouter.route('/')
               .get(
@@ -10,11 +10,7 @@ SupplierRouter.route('/')
                 nameQuery,
                 methodQuery,
                 async (req, res) => {
-                  const response = await SupplierController.getByQuery({
-                    id: req.id,
-                    name: req.name,
-                    method: req.method
-                  });
+                  const response = await SupplierController.getByQuery({...req.custom.query});
                   res.set('X-Total-Amount', (await SupplierController.getTotalCount()).body.total_count);
                   res.set('X-Current-Amount', response.count);
                   res.status(response.code).json(response.body);

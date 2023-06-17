@@ -1,6 +1,6 @@
 const methodQuery = (req, res, next) => {
   const method = req.query.method || -1;
-  req.method = method;
+  req.custom.query.method = method;
   next();
 };
 

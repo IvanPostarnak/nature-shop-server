@@ -1,17 +1,17 @@
 const PostRouter = require('express').Router();
-const languageQuery = require('../middleware/languageQuery');
-const authorQuery = require('../middleware/authorQuery');
-const ratingQuery = require('../middleware/ratingQuery');
-const votesQuery = require('../middleware/votesQuery');
-const visitedQuery = require('../middleware/visitedQuery');
-const limitQuery = require('../middleware/limitQuery');
-const startQuery = require('../middleware/startQuery');
-const endQuery = require('../middleware/endQuery');
+const languageQuery = require('../middleware/query/language.query');
+const authorQuery = require('../middleware/query/author.query');
+const ratingQuery = require('../middleware/query/rating.query');
+const votesQuery = require('../middleware/query/votes.query');
+const visitedQuery = require('../middleware/query/visited.query');
+const limitQuery = require('../middleware/query/limit.query');
+const startQuery = require('../middleware/query/start.query');
+const endQuery = require('../middleware/query/end.query');
 const PostController = require('./../controller/post.controller');
-const createDateQuery = require('../middleware/createDateQuery');
-const titleQuery = require('../middleware/titleQuery');
-const contentQuery = require('../middleware/contentQuery');
-const methodQuery = require('../middleware/methodQuery');
+const createDateQuery = require('../middleware/query/createDate.query');
+const titleQuery = require('../middleware/query/title.query');
+const contentQuery = require('../middleware/query/content.query');
+const methodQuery = require('../middleware/query/method.query');
 
 PostRouter.route('/')
           .get(
@@ -26,18 +26,7 @@ PostRouter.route('/')
             createDateQuery,
             methodQuery,
             async (req, res) => {
-              const response = await PostController.getByQuery({
-                language: req.language,
-                author: req.author,
-                rating: req.rating,
-                votes_number: req.votes_number,
-                visited_total: req.visited_total,
-                limit: req.limit,
-                start: req.start,
-                end: req.end,
-                create_ts: req.create_ts,
-                method: req.method
-              });
+              const response = await PostController.getByQuery({...req.custom.query});
               res.set('X-Total-Amount', (await PostController.getTotalCount()).body.total_count);
               res.set('X-Current-Amount', response.count);
               res.status(response.code).json(response.body);
@@ -50,11 +39,7 @@ PostRouter.route('/search')
             contentQuery,
             methodQuery,
             async (req, res) => {
-              const response = await PostController.getByQuery({
-                title: req.title,
-                content: req.content,
-                method: req.method
-              });
+              const response = await PostController.getByQuery({...req.custom.query});
               res.set('X-Total-Amount', (await PostController.getTotalCount()).body.total_count);
               res.set('X-Current-Amount', response.count);
               res.status(response.code).json(response.body);

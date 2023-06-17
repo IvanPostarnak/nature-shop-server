@@ -1,6 +1,7 @@
 require('dotenv').config();
 const express = require('express');
 const loggerURL = require('./middleware/loggerURL');
+const initMiddleware = require('./middleware/init.middleware');
 const HomeRouter = require('./routes/home.router');
 const PostRouter = require('./routes/post.router');
 const ProductRouter = require('./routes/product.router');
@@ -15,6 +16,7 @@ const PurchaseRouter = require('./routes/purchase.router');
 const server = express();
 
 server.set(express.json());
+server.use(initMiddleware);
 server.use(loggerURL);
 
 server.use(HomeRouter);

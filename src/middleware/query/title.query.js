@@ -1,6 +1,6 @@
 const titleQuery = (req, res, next) => {
   const title = req.query.title || -1;
-  req.title = title;
+  req.custom.query.title = title;
   next();
 }
 

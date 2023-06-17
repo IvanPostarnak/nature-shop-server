@@ -1,6 +1,6 @@
 const idQuery = (req, res, next) => {
   const id = req.query.id || -1;
-  req.id = id;
+  req.custom.query.id = id;
   next();
 };
 

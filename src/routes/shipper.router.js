@@ -1,8 +1,8 @@
 const ShipperRouter = require('express').Router();
 const ShipperController = require('../controller/shipper.controller');
-const idQuery = require('../middleware/idQuery');
-const nameQuery = require('../middleware/nameQuery');
-const methodQuery = require('../middleware/methodQuery');
+const idQuery = require('../middleware/query/id.query');
+const nameQuery = require('../middleware/query/name.query');
+const methodQuery = require('../middleware/query/method.query');
 
 ShipperRouter.route('/')
              .get(
@@ -10,11 +10,7 @@ ShipperRouter.route('/')
                idQuery,
                methodQuery,
                async (req, res) => {
-                 const response = await ShipperController.getByQuery({
-                  id: req.id,
-                  name: req.name,
-                  method: req.method
-                 });
+                 const response = await ShipperController.getByQuery({...req.custom.query});
                  res.set('X-Total-Amount', (await ShipperController.getTotalCount()).body.total_count);
                  res.set('X-Current-Amount', response.count);
                  res.status(response.code).json(response.body);

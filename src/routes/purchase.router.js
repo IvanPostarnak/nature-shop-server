@@ -1,28 +1,22 @@
 const PurchaseRouter = require('express').Router();
 const PurchaseController = require('../controller/purchase.controller');
-const endQuery = require('../middleware/endQuery');
-const idQuery = require('../middleware/idQuery');
-const infoQuery = require('../middleware/infoQuery');
-const limitQuery = require('../middleware/limitQuery');
-const startQuery = require('../middleware/startQuery');
-const methodQuery = require('../middleware/methodQuery');
+const endQuery = require('../middleware/query/end.query');
+const idQuery = require('../middleware/query/id.query');
+const infoMod = require('../middleware/info.mod');
+const limitQuery = require('../middleware/query/limit.query');
+const startQuery = require('../middleware/query/start.query');
+const methodQuery = require('../middleware/query/method.query');
 
 PurchaseRouter.route('/')
               .get(
-                infoQuery,
+                infoMod,
                 idQuery,
                 startQuery,
                 endQuery,
                 limitQuery,
                 methodQuery,
                 async (req, res) => {
-                  const response = await PurchaseController.getByQuery({
-                    id: req.id,
-                    start: req.start,
-                    end: req.end,
-                    limit: req.limit,
-                    method: req.method
-                  }, req.info_mod);
+                  const response = await PurchaseController.getByQuery({...req.custom.query}, req.custom.info_mod);
                   res.set('X-Total-Amount', (await PurchaseController.getTotalCount()).body.total_count);
                   res.set('X-Current-Amount', response.count);
                   res.status(response.code).json(response.body);
@@ -31,9 +25,9 @@ PurchaseRouter.route('/')
 
 PurchaseRouter.route('/all')
               .get(
-                infoQuery,
+                infoMod,
                 async (req, res) => {
-                  const response = await PurchaseController.getAll(req.info_mod);
+                  const response = await PurchaseController.getAll(req.custom.info_mod);
                   res.set('X-Total-Amount', response.count);
                   res.status(response.code).json(response.body);
                 }
@@ -47,9 +41,9 @@ PurchaseRouter.route('/total_count')
 
 PurchaseRouter.route('/:id')
               .get(
-                infoQuery,
+                infoMod,
                 async (req, res) => {
-                  const response = await PurchaseController.getOneById(req.params.id, req.info_mod);
+                  const response = await PurchaseController.getOneById(req.params.id, req.custom.info_mod);
                   res.set('X-Total-Amount', response.count);
                   res.status(response.code).json(response.body);
                 }
@@ -63,13 +57,7 @@ PurchaseRouter.route('/support/:arg')
                 limitQuery,
                 methodQuery,
                 async (req, res) => {
-                  const response = await PurchaseController.getSupport({
-                    id: req.id,
-                    start: req.start,
-                    end: req.end,
-                    limit: req.limit,
-                    method: req.method
-                  }, req.params.arg);
+                  const response = await PurchaseController.getSupport({...req.custom.query}, req.params.arg);
                   res.set('X-Total-Amount', (await PurchaseController.getTotalCount()).body.total_count);
                   res.set('X-Current-Amount', response.count);
                   res.status(response.code).json(response.body);

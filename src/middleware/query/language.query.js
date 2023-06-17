@@ -1,6 +1,6 @@
 const languageQuery = (req, res, next) => {
   const language = parseInt(req.query.language) || -1;
-  req.language = language;
+  req.custom.query.language = language;
   next();
 }
 

@@ -1,11 +1,11 @@
 const UniversalRouter = require('express').Router();
 const UniversalController = require('../controller/universal.controller');
-const endQuery = require('../middleware/endQuery');
-const limitQuery = require('../middleware/limitQuery');
-const nameQuery = require('../middleware/nameQuery');
-const startQuery = require('../middleware/startQuery');
-const idQuery = require('../middleware/idQuery');
-const methodQuery = require('../middleware/methodQuery');
+const endQuery = require('../middleware/query/end.query');
+const limitQuery = require('../middleware/query/limit.query');
+const nameQuery = require('../middleware/query/name.query');
+const startQuery = require('../middleware/query/start.query');
+const idQuery = require('../middleware/query/id.query');
+const methodQuery = require('../middleware/query/method.query');
 
 UniversalRouter.route('/:relation')
                .get(
@@ -16,14 +16,7 @@ UniversalRouter.route('/:relation')
                   idQuery,
                   methodQuery,
                   async (req, res) => {
-                    const response = await UniversalController.getRelation({
-                      name: req.name,
-                      limit: req.limit,
-                      start: req.start,
-                      end: req.end,
-                      id: req.id,
-                      method: req.method                    
-                    }, req.params.relation);
+                    const response = await UniversalController.getRelation({...req.custom.query}, req.params.relation);
                     res.set('X-Total-Amount', response.count);
                     res.status(response.code).json(response.body);
                   }

@@ -1,6 +1,6 @@
 const contentQuery = (req, res, next) => {
   const content = req.query.content || -1;
-  req.content = content;
+  req.custom.query.content = content;
   next();
 }
 
