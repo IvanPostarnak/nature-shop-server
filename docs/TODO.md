@@ -7,3 +7,4 @@
 - [ ] To add try-catch block for request to dictionary in Postgresql class (right now there is a possibility to abort whole process if there is a misstake to querying dictionary)
 - [ ] To extract repeating try-catch blocks from constrollers into common method (refactor)
 - [X] To add a client-side query param 'method=or/and' to configure how to combine other query params
+- [ ] To add docs/requests/purchases/ folder and .md request files, related to this route
