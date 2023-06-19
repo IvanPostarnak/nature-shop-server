@@ -1,8 +1,8 @@
-# Request: Get Total Count of Suppliers
+# Request: Get Total Count of Employees
 
 ## Description :bulb:
-This request allow client-side to get total amount of all suppliers in the database  
-- [Request: Get Total Count of Suppliers](#request-get-total-count-of-suppliers)
+This request allow client-side to get total amount of all employees in the database  
+- [Request: Get Total Count of Employees](#request-get-total-count-of-employees)
   - [Description :bulb:](#description-bulb)
   - [Endpoint :motorway:](#endpoint-motorway)
   - [Query parameters :pencil:](#query-parameters-pencil)
@@ -15,12 +15,12 @@ This request allow client-side to get total amount of all suppliers in the datab
 ## Endpoint :motorway:
 Mainly, you should set your own PORT once you want to run server
 ```
-localhost:PORT/suppliers/total_count
+localhost:PORT/employees/total_count
 ```
 By default, if there is not specified 'PORT' environment param, server runs on ':5300' port    
 So total amount will be available at this endpoint
 ```
-localhost:5300/suppliers/total_count
+localhost:5300/employees/total_count
 ```
 
 ## Query parameters :pencil:    
@@ -38,7 +38,7 @@ Content-Length  : 19
 ### body
 ```json
 {
-    "total_count": "2"
+  "total_count": "4"
 }
 ```
 ## Error :heavy_exclamation_mark:
@@ -54,5 +54,5 @@ response.body =
 "Error querying the database: Server Error"
 
 // or this
-"Unable to define table by params : 'suppliers' at 'getTotalCount()' method"
+"Unable to define table by params : 'employees' at 'getTotalCount()' method"
 ```

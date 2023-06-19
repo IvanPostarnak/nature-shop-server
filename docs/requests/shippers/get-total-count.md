@@ -10,7 +10,7 @@ This request allow client-side to get total amount of all shippers in the databa
     - [headers](#headers)
     - [body](#body)
   - [Error :heavy\_exclamation\_mark:](#error-heavy_exclamation_mark)
-    - [505: Server Error](#505-server-error)
+    - [500: Server Error](#500-server-error)
 
 ## Endpoint :motorway:
 Mainly, you should set your own PORT once you want to run server
@@ -42,7 +42,7 @@ Content-Length  : 19
 }
 ```
 ## Error :heavy_exclamation_mark:
-### 505: Server Error
+### 500: Server Error
 Server-side will send this response once something bad happened on the server side
 ```
 response.code = 500

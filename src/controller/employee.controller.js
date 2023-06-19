@@ -31,7 +31,7 @@ class EmployeeController extends Controller {
       response.count = response.body.length;
       if (response.count === 0) {
         response.code = 404;
-        response.body = 'There are not any employees';
+        response.body = `There are not any employees (info_mod = '${infoMod}')`;
       }
     } catch (err) {
       response.code = 500;

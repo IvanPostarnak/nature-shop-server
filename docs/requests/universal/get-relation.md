@@ -24,7 +24,7 @@ This requests allow client-side to get universal relations by passing queries. T
       - ['.../payment\_types' case](#payment_types-case)
   - [Error :heavy\_exclamation\_mark:](#error-heavy_exclamation_mark)
     - [404: Not found](#404-not-found)
-    - [505: Server Error](#505-server-error)
+    - [500: Server Error](#500-server-error)
 
 ## Endpoint :motorway:
 Mainly, you should set your own PORT once you want to run server
@@ -265,7 +265,7 @@ response.body =
 
 Universal relation 'payment_types' were not found by queries : '{..., ..., ...}'
 ```
-### 505: Server Error
+### 500: Server Error
 Server-side will send this response once something bad happened on the server side
 ```
 response.code = 500
