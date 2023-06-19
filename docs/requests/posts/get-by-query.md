@@ -1,7 +1,7 @@
 # Request: Get Posts by Query params
 
 ## Description :bulb:
-This request allow client to get all posts  
+This request allow client-side to get some posts (by passing query params)
 - [Request: Get Posts by Query params](#request-get-posts-by-query-params)
   - [Description :bulb:](#description-bulb)
   - [Endpoint :motorway:](#endpoint-motorway)

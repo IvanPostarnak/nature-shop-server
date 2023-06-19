@@ -1,7 +1,7 @@
 # Request: Get All Posts
 
 ## Description :bulb:
-This request allow client to get all posts  
+This request allow client-side to get all posts  
 - [Request: Get All Posts](#request-get-all-posts)
   - [Description :bulb:](#description-bulb)
   - [Endpoint :motorway:](#endpoint-motorway)

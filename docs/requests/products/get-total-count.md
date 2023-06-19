@@ -1,8 +1,8 @@
-# Request: Get Total Count of Posts
+# Request: Get Total Count of Products
 
 ## Description :bulb:
-This request allow client-side to get amount of all posts in the database  
-- [Request: Get Total Count of Posts](#request-get-total-count-of-posts)
+This request allow client-side to get total amount of all products in the database  
+- [Request: Get Total Count of Products](#request-get-total-count-of-products)
   - [Description :bulb:](#description-bulb)
   - [Endpoint :motorway:](#endpoint-motorway)
   - [Query parameters :pencil:](#query-parameters-pencil)
@@ -15,12 +15,12 @@ This request allow client-side to get amount of all posts in the database
 ## Endpoint :motorway:
 Mainly, you should set your own PORT once you want to run server
 ```
-localhost:PORT/posts/total_count
+localhost:PORT/products/total_count
 ```
 By default, if there is not specified 'PORT' environment param, server runs on ':5300' port    
 So total_amount will be available at this endpoint
 ```
-localhost:5300/posts/total_count
+localhost:5300/products/total_count
 ```
 
 ## Query parameters :pencil:    
@@ -38,7 +38,7 @@ Content-Length  : 21
 ### body
 ```json
 {
-    "total_count": "100"
+    "total_count": "177"
 }
 ```
 ## Error :heavy_exclamation_mark:
@@ -54,5 +54,5 @@ response.body =
 "Error querying the database: Server Error"
 
 // or this
-"Unable to define table by params : 'posts' at 'getTotalCount()' method"
+"Unable to define table by params : 'products' at 'getTotalCount()' method"
 ```

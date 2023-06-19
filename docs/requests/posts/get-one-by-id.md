@@ -1,7 +1,7 @@
 # Request: Get One Post by ID
 
 ## Description :bulb:
-This request allow client to get information about one post by setting it's 'id' as URL-path param  
+This request allow client-side to get information about one post by setting it's 'id' as URL-path param  
 - [Request: Get One Post by ID](#request-get-one-post-by-id)
   - [Description :bulb:](#description-bulb)
   - [Endpoint :motorway:](#endpoint-motorway)
@@ -23,7 +23,7 @@ So single specific post will be available at this endpoint
 ```
 localhost:5300/posts/:id
 ```
-**Exmaple**: in order to get a post with **'post_id'=23** you should send a GET request to this endpoint
+**Example**: in order to get a post with **'post_id'=23** you should send a GET request to this endpoint
 ```
 localhost:5300/posts/23
 ```
