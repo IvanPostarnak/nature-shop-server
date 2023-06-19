@@ -31,7 +31,7 @@ class ShopController extends Controller {
       response.count = response.body.length;
       if (response.count === 0) {
         response.code = 404;
-        response.body = `There are not any shops`;
+        response.body = `There are not any shops (info_mod = '${infoMod}')`;
       }
     } catch (err) {
       response.code = 500;

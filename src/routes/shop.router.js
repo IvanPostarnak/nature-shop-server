@@ -18,7 +18,7 @@ ShopRouter.route('/')
             async (req, res) => {
               const response = await ShopController.getByQuery({...req.custom.query}, req.custom.info_mod);
               res.set('X-Total-Amount', (await ShopController.getTotalCount()).body.total_count);
-              res.set('X-Current-Amount', res.count);
+              res.set('X-Current-Amount', response.count);
               res.status(response.code).json(response.body);
             }
           );
@@ -28,7 +28,7 @@ ShopRouter.route('/all')
             infoMod,
             async (req, res) => {
               const response = await ShopController.getAll(req.custom.info_mod);
-              res.set('X-Total-Amount', res.count);
+              res.set('X-Total-Amount', response.count);
               res.status(response.code).json(response.body);
             }
           );
