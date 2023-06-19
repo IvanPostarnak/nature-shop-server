@@ -2,9 +2,14 @@ const HomeRouter = require('express').Router();
 const HomeController = require('./../controller/home.controller');
 
 HomeRouter.route('/')
-.get((req, res) => {
-  console.log('It is working');
-  res.status(200).send(HomeController.getHome());
-})
+          .get((req, res) => {
+              res.status(200).send(HomeController.getHome());
+          });
+
+HomeRouter.route('/pages/privacy_policy')
+          .get(async (req, res) => {
+            const response = await HomeController.getPrivacyPolicy();
+            res.status(response.code).json(response.body);
+          });
 
 module.exports = HomeRouter;
