@@ -141,7 +141,7 @@ Content-Length    : 805
 ```
 ## Error :heavy_exclamation_mark:
 ### 404: Not found
-*Client-side will recieve this response once there are no products in the database*
+Client-side will recieve this response once there are no products in the database
 ```
 response.code = 404
 ```
@@ -159,7 +159,7 @@ response.body =
 "Products by queries : '{..., ..., ...}' were not found"
 ```
 ### 505: Server Error
-*Server-side will send this response once something bad happened on the server side*
+Server-side will send this response once something bad happened on the server side
 ```
 response.code = 500
 ```

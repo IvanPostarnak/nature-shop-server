@@ -43,7 +43,7 @@ Content-Length  : 21
 ```
 ## Error :heavy_exclamation_mark:
 ### 505: Server Error
-*Server-side will send this response once something bad happened on the server side*
+Server-side will send this response once something bad happened on the server side
 ```
 response.code = 500
 ```

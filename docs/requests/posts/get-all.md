@@ -67,7 +67,7 @@ Content-Length  : 343182
 ```
 ## Error :heavy_exclamation_mark:
 ### 404: Not found
-*Client-side will recieve this response once there are no posts in the database*
+Client-side will recieve this response once there are no posts in the database
 ```
 response.code = 404
 ```
@@ -77,7 +77,7 @@ response.body =
 "There are not any posts"
 ```
 ### 505: Server Error
-*Server-side will send this response once something bad happened on the server side*
+Server-side will send this response once something bad happened on the server side
 ```
 response.code = 500
 ```

@@ -84,6 +84,7 @@ Content-Length    : 112
 
 ### body
 #### '.../genders' case
+Provide information about existing in the database genders
 ```json
 [
   {
@@ -94,6 +95,7 @@ Content-Length    : 112
 ```
 
 #### '.../brands' case
+Provide information about existing in the database brands
 ```json
 [
   {
@@ -106,6 +108,7 @@ Content-Length    : 112
 ```
 
 #### '.../cities' case
+Provide information about existing in the database cities
 ```json
 [
   {
@@ -120,6 +123,7 @@ Content-Length    : 112
 ```
 
 #### '.../color_schemas' case
+Provide information about existing in the database color schemas
 ```json
 [
   {
@@ -130,6 +134,7 @@ Content-Length    : 112
 ```
 
 #### '.../companies' case
+Provide information about existing in the database companies (producers)
 ```json
 [
   {
@@ -143,6 +148,7 @@ Content-Length    : 112
 ```
 
 #### '.../countries' case
+Provide information about existing in the database countries
 ```json
 [
   {
@@ -158,6 +164,7 @@ Content-Length    : 112
 ```
 
 #### '.../currency' case
+Provide information about existing in the database currency
 ```json
 [
   {
@@ -170,6 +177,7 @@ Content-Length    : 112
 ```
 
 #### '.../exchange_rates' case
+Provide information about existing in the database exchange rates
 ```json
 [
   {
@@ -187,6 +195,7 @@ Content-Length    : 112
 ```
 
 #### '.../family_statuses' case
+Provide information about existing in the database family statuses
 ```json
 [
   {
@@ -198,6 +207,7 @@ Content-Length    : 112
 ```
 
 #### '.../languages' case
+Provide information about existing in the database languages
 ```json
 [
   {
@@ -210,6 +220,7 @@ Content-Length    : 112
 ```
 
 #### '.../measure_units' case
+Provide information about existing in the database measure units
 ```json
 [
   {
@@ -221,6 +232,7 @@ Content-Length    : 112
 ```
 
 #### '.../packing_materials' case
+Provide information about existing in the database packing materials
 ```json
 [
   {
@@ -232,6 +244,7 @@ Content-Length    : 112
 ```
 
 #### '.../payment_types' case
+Provide information about existing in the database payments types
 ```json
 [
   {
@@ -243,7 +256,7 @@ Content-Length    : 112
 
 ## Error :heavy_exclamation_mark:
 ### 404: Not found
-*Client-side will recieve this response once there is not such relation or relation's item in the database*
+Client-side will recieve this response once there is not such relation or relation's item in the database
 ```
 response.code = 404
 ```
@@ -253,7 +266,7 @@ response.body =
 Universal relation 'payment_types' were not found by queries : '{..., ..., ...}'
 ```
 ### 505: Server Error
-*Server-side will send this response once something bad happened on the server side*
+Server-side will send this response once something bad happened on the server side
 ```
 response.code = 500
 ```

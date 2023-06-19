@@ -58,7 +58,7 @@ class CustomerController extends Controller {
       response.count = response.body.length;
       if (response.count === 0) {
         response.code = 404;
-        response.body = `There is not any customer with id='${id}'(info_mod = '${infoMod}')`;
+        response.body = `There is not any customer with id='${id}' (info_mod = '${infoMod}')`;
       }
     } catch (err) {
       response.code = 500;

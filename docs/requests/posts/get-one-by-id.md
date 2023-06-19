@@ -44,33 +44,33 @@ Content-Length  : 2758
 ### body
 ```json
 [
-    {
-        "post_id": 23,
-        "title": "Dietary Mineral Cu Cuprum",
-        "content": "Introduction:\nCopper (Cu) is a trace element necessary for the normal functioning of the body. It is widely known and is important for various ... and antioxidant protection. With an excess or lack of copper, various diseases can occur. To maintain the balance of copper in the body, it is recommended to eat foods rich in this mineral.",
-        "author": {
-            "employee_id": 2,
-            "first_name": "Ivan",
-            "last_name": "Postarnak",
-            "middle_name": null
-        },
-        "language": {
-            "language_id": 1,
-            "name": "English",
-            "name_native": "English",
-            "code": "en"
-        },
-        "rating": null,
-        "votes_count": 0,
-        "visited_total": 0,
-        "created": "2023-05-29T00:17:44.877Z",
-        "edited": "2023-05-29T00:17:44.877Z"
-    }
+  {
+    "post_id": 23,
+    "title": "Dietary Mineral Cu Cuprum",
+    "content": "Introduction:\nCopper (Cu) is a trace element necessary for the normal functioning of the body. It is widely known and is important for various ... and antioxidant protection. With an excess or lack of copper, various diseases can occur. To maintain the balance of copper in the body, it is recommended to eat foods rich in this mineral.",
+    "author": {
+      "employee_id": 2,
+      "first_name": "Ivan",
+      "last_name": "Postarnak",
+      "middle_name": null
+    },
+    "language": {
+      "language_id": 1,
+      "name": "English",
+      "name_native": "English",
+      "code": "en"
+    },
+      "rating": null,
+      "votes_count": 0,
+      "visited_total": 0,
+      "created": "2023-05-29T00:17:44.877Z",
+      "edited": "2023-05-29T00:17:44.877Z"
+  }
 ]
 ```
 ## Error :heavy_exclamation_mark:
 ### 404: Not found
-*Client-side will recieve this response once there are no posts in the database*
+Client-side will recieve this response once there are no posts in the database
 ```
 response.code = 404
 ```
@@ -80,7 +80,7 @@ response.body =
 "Post with id '23' was not found"
 ```
 ### 505: Server Error
-*Server-side will send this response once something bad happened on the server side*
+Server-side will send this response once something bad happened on the server side
 ```
 response.code = 500
 ```

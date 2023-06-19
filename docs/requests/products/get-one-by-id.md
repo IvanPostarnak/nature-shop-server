@@ -138,7 +138,7 @@ Content-Length  : 157
 ```
 ## Error :heavy_exclamation_mark:
 ### 404: Not found
-*Client-side will recieve this response once there is not such product in the database*
+Client-side will recieve this response once there is not such product in the database
 ```
 response.code = 404
 ```
@@ -148,7 +148,7 @@ response.body =
 "There is not a product with id '23' and query 'basic'"
 ```
 ### 505: Server Error
-*Server-side will send this response once something bad happened on the server side*
+Server-side will send this response once something bad happened on the server side
 ```
 response.code = 500
 ```

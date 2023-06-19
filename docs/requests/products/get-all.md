@@ -135,7 +135,7 @@ Content-Length  : 31215
 ```
 ## Error :heavy_exclamation_mark:
 ### 404: Not found
-*Client-side will recieve this response once there are no products in the database*
+Client-side will recieve this response once there are no products in the database
 ```
 response.code = 404
 ```
@@ -145,7 +145,7 @@ response.body =
 "There are not any products"
 ```
 ### 505: Server Error
-*Server-side will send this response once something bad happened on the server side*
+Server-side will send this response once something bad happened on the server side
 ```
 response.code = 500
 ```
@@ -156,5 +156,5 @@ response.body =
 "Error uerying the database: Server Error"
 
 // or this
-"Unable to define table by params : 'products' at 'getAll()' method"
+"Unable to define table by params : 'products,basic' at 'getAll()' method"
 ```

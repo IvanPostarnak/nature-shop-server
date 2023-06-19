@@ -73,6 +73,7 @@ Content-Length    : 127
 
 ### body
 #### '.../categories' case
+Provide information about existing products' categories
 ```json
 [
   {
@@ -85,6 +86,7 @@ Content-Length    : 127
 ```
 
 #### '.../forms' case
+Provide information about existing products' forms
 ```json
 [
   {
@@ -97,6 +99,7 @@ Content-Length    : 127
 ```
 
 #### '.../types' case
+Provide information about existing products' types
 ```json
 [
   {
@@ -109,6 +112,7 @@ Content-Length    : 127
 ```
 
 #### '.../data' case
+Provide information about existing products' data
 ```json
 [
   {
@@ -125,6 +129,7 @@ Content-Length    : 127
 ```
 
 #### '.../info' case
+Provide information about existing products' info
 ```json
 [
   {
@@ -142,6 +147,7 @@ Content-Length    : 127
 ```
 
 #### '.../points' case
+Provide information about existing products' points (bonus points)
 ```json
 [
   {
@@ -155,6 +161,7 @@ Content-Length    : 127
 ```
 
 #### '.../price' case
+Provide information about existing products' prices
 ```json
 [
   {
@@ -169,6 +176,7 @@ Content-Length    : 127
 ```
 
 #### '.../rating' case
+Provide information about existing products' ratings
 ```json
 [
   {
@@ -181,6 +189,7 @@ Content-Length    : 127
 ```
 
 #### '.../size' case
+Provide information about existing products' sizes
 ```json
 [
   {
@@ -197,7 +206,7 @@ Content-Length    : 127
 
 ## Error :heavy_exclamation_mark:
 ### 404: Not found
-*Client-side will recieve this response once there is not such relation or relation's item in the database*
+Client-side will recieve this response once there is not such relation or relation's item in the database
 ```
 response.code = 404
 ```
@@ -207,7 +216,7 @@ response.body =
 There are not any support relations matching: 'size' by query '1'
 ```
 ### 505: Server Error
-*Server-side will send this response once something bad happened on the server side*
+Server-side will send this response once something bad happened on the server side
 ```
 response.code = 500
 ```

@@ -1,8 +1,8 @@
-# Request: Get Total Count of Products
+# Request: Get Total Count of Cutomers
 
 ## Description :bulb:
-This request allow client-side to get total amount of all products in the database  
-- [Request: Get Total Count of Products](#request-get-total-count-of-products)
+This request allow client-side to get total amount of all customers in the database  
+- [Request: Get Total Count of Cutomers](#request-get-total-count-of-cutomers)
   - [Description :bulb:](#description-bulb)
   - [Endpoint :motorway:](#endpoint-motorway)
   - [Query parameters :pencil:](#query-parameters-pencil)
@@ -15,12 +15,12 @@ This request allow client-side to get total amount of all products in the databa
 ## Endpoint :motorway:
 Mainly, you should set your own PORT once you want to run server
 ```
-localhost:PORT/products/total_count
+localhost:PORT/customers/total_count
 ```
 By default, if there is not specified 'PORT' environment param, server runs on ':5300' port    
-So total_amount will be available at this endpoint
+So total amount will be available at this endpoint
 ```
-localhost:5300/products/total_count
+localhost:5300/customers/total_count
 ```
 
 ## Query parameters :pencil:    
@@ -32,13 +32,13 @@ localhost:5300/products/total_count
 ```
 X-Powered-By    : Express
 Content-Type    : application/json; charset=utf-8
-Content-Length  : 21
+Content-Length  : 20
 ...               ...
 ```
 ### body
 ```json
 {
-    "total_count": "177"
+  "total_count": "20"
 }
 ```
 ## Error :heavy_exclamation_mark:
