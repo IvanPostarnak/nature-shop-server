@@ -12,4 +12,10 @@ HomeRouter.route('/pages/privacy_policy')
             res.status(response.code).json(response.body);
           });
 
+HomeRouter.route('/pages/:page')
+          .get(async (req, res) => {
+            const response = await HomeController.getPage(req.params.page);
+            res.status(response.code).json(response.body);
+          });
+
 module.exports = HomeRouter;

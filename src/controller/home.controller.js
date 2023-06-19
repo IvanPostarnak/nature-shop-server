@@ -10,6 +10,22 @@ class HomeController extends Controller {
     return('Some text data')
   }
 
+  async getPage(page) {
+    let response = {code: 200, body: '', count: 0};
+    try {
+      response.body = await this.database.getByQuery({limit: 1}, 'home', page);
+      response.count = response.body.length;
+      if (response.count === 0) {
+        response.code = 404;
+        response.body = `Page '${page}' was not found in the database`;
+      }
+    } catch (err) {
+      response.code = 500;
+      response.body = err.message;
+    }
+    return response;
+    }
+
  async getPrivacyPolicy() {
   let response = {code: 200, body: '', count: 0};
   try {
@@ -17,7 +33,7 @@ class HomeController extends Controller {
     response.count = response.body.length;
     if (response.count === 0) {
       response.code = 404;
-      response.body = `Privacy Policy were not found in the database`;
+      response.body = `Page 'Privacy policy' was not found in the database`;
     }
   } catch (err) {
     response.code = 500;
