@@ -28,7 +28,7 @@ Mainly, you should set your own PORT once you want to run server
 localhost:PORT/products/support/:arg
 ```
 By default, if there is not specified 'PORT' environment param, server runs on ':5300' port    
-So single specific product will be available at this endpoint
+So single specific support relations will be available at this endpoint
 ```
 localhost:5300/products/support/:arg
 ```
