@@ -1,6 +1,7 @@
 # TODOs
 - [ ] To create a common Error() object, to invoke similar error messages easily
 - [ ] To attach testing scripts for whole server
+  - [X] helpers/ functions
 - [ ] To solve comming issues with security: add an area check (check of source of request)
 - [ ] To wrap whole server in the docker container
 - [ ] To create an abstraction for tables, or somehow bound tables' columns and query params. There is a problem with 'configureTableQuery()' method - it is too much specific: I tried to add 'ratingQuery' middleware to 'shops/?rating=' route, but this config function checks only 'rating_5' rating column... so we need to make it less specific
