@@ -1,0 +1,15 @@
+{
+  "roots": [
+    "<rootDir>/tests/",
+    "<rootDir>/src/"
+  ],
+  "collectCoverage": true,
+  "coverageProvider": "v8",
+  "collectCoverageFrom": [
+    "<rootDir>/src/**/*",
+    "!<rootDir>/src/config/**"
+  ],
+  "coveragePathIgnorePatterns": [
+    "/node_modules/"
+  ]
+}
