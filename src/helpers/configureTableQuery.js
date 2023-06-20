@@ -1,10 +1,10 @@
 const defineTableQueryMethod = require('./defineTableQueryMethod');
-const numberToTimestamp = require('./numberToTimestamp');
+const numberToTimeString = require('./numberToTimeString');
 
 const configureTableQuery = (queryObj, table) => {
   const method = defineTableQueryMethod(queryObj.method);
 
-  const startOfQuery = `SELECT * from ${table.name} `;
+  const startOfQuery = `SELECT * FROM ${table.name} `;
   const query = {
     range: `WHERE (${table.column} >= ${queryObj.start || 0}${queryObj.end ? ` ${method} ${table.column} <= ${queryObj.end})` : ')'}`,
     author: `${queryObj.author ? ` ${method} (author_id = ${queryObj.author})` : ''}`,
@@ -12,7 +12,7 @@ const configureTableQuery = (queryObj, table) => {
     rating: `${queryObj.rating ? ` ${method} (rating >= ${queryObj.rating})` : ''}`,
     votes_count: `${queryObj.votes_count ? ` ${method} (votes_count >= ${queryObj.votes_count})` : ''}`,
     visited_total: `${queryObj.visited_total ? ` ${method} (visited_total >= ${queryObj.visited_total})` : ''}`,
-    created: `${queryObj.created ? ` ${method} (created >= to_timestamp('${numberToTimestamp(queryObj.created)}', 'YYYY-MM-DD HH24:MI:SS'))` : ''}`,
+    created: `${queryObj.created ? ` ${method} (created >= to_timestamp('${numberToTimeString(queryObj.created)}', 'YYYY-MM-DD HH24:MI:SS'))` : ''}`,
     title: `${queryObj.title ? ` ${method} (title ILIKE '%${queryObj.title}%')` : ''}`,
     content: `${queryObj.content ? ` ${method} (content ILIKE '%${queryObj.content}%')` : ''}`,
     name: `${queryObj.name ? ` ${method} (name ILIKE '%${queryObj.name}%')` : ''}`,
